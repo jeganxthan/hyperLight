@@ -12,9 +12,13 @@ if [ -f /etc/sddm.conf.d/10-theme.conf ]; then
   cp /etc/sddm.conf.d/10-theme.conf "/etc/sddm.conf.d/10-theme.conf.bak_codex_$(date +%Y%m%d%H%M%S)"
 fi
 
-cat > /etc/sddm.conf.d/10-theme.conf <<'EOF'
+theme_name="maldives"
+[ -d /usr/share/sddm/themes/sugar-candy ] && theme_name="sugar-candy"
+[ -d /usr/share/sddm/themes/sugar-candy-git ] && theme_name="sugar-candy-git"
+
+cat > /etc/sddm.conf.d/10-theme.conf <<EOF
 [Theme]
-Current=maya
+Current=${theme_name}
 CursorTheme=Breeze
 EOF
 
@@ -30,12 +34,14 @@ MinimumUid=1000
 MaximumUid=60513
 EOF
 
-theme_user="/usr/share/sddm/themes/maya/theme.conf.user"
-if [ -f "$theme_user" ]; then
-  cp "$theme_user" "${theme_user}.bak_codex_$(date +%Y%m%d%H%M%S)"
-fi
+# Optional theme tuning for maya only.
+if [ "$theme_name" = "maya" ]; then
+  theme_user="/usr/share/sddm/themes/maya/theme.conf.user"
+  if [ -f "$theme_user" ]; then
+    cp "$theme_user" "${theme_user}.bak_codex_$(date +%Y%m%d%H%M%S)"
+  fi
 
-cat > "$theme_user" <<'EOF'
+  cat > "$theme_user" <<'EOF'
 [General]
 primaryShade=#0a0e16
 primaryLight=#132235
@@ -61,10 +67,9 @@ warningText=#ffd580
 rebootColor=#f59e0b
 powerColor=#ef4444
 EOF
+fi
 
-echo "SDDM main screen theme applied (maya + Arch-blue palette)."
-
-# PAM: fingerprint first, fallback to password.
+# PAM for main login screen (SDDM): password-only.
 pam_file="/etc/pam.d/sddm"
 if [ -f "$pam_file" ]; then
   cp "$pam_file" "${pam_file}.bak_codex_$(date +%Y%m%d%H%M%S)"
@@ -72,7 +77,6 @@ fi
 
 cat > "$pam_file" <<'EOF'
 #%PAM-1.0
-auth       sufficient   pam_fprintd.so
 auth       include      system-login
 
 account    include      system-login
@@ -80,28 +84,12 @@ password   include      system-login
 session    include      system-login
 EOF
 
-# Theme tweak: prefill last user in maya username box so login does not keep asking username.
-main_qml="/usr/share/sddm/themes/maya/Main.qml"
-if [ -f "$main_qml" ]; then
-  cp "$main_qml" "${main_qml}.bak_codex_$(date +%Y%m%d%H%M%S)"
-  if ! grep -q "text[[:space:]]*:[[:space:]]*userModel.lastUser" "$main_qml"; then
-    awk '
-      /id[[:space:]]*:[[:space:]]*maya_username/ && !done {
-        print $0
-        print ""
-        print "        text    : userModel.lastUser"
-        done=1
-        next
-      }
-      { print }
-    ' "$main_qml" > /tmp/maya-main.qml.codex
-    install -m 644 /tmp/maya-main.qml.codex "$main_qml"
-  fi
-fi
-
 echo "Applied:"
-echo "- SDDM maya theme + colors"
+echo "- SDDM theme: ${theme_name}"
 echo "- Remember last user/session"
-echo "- PAM fingerprint first, password fallback"
-echo "- Prefill username with last logged in user"
+echo "- PAM: password-only on SDDM (fingerprint disabled for main login screen)"
+echo "- No theme QML patching"
+if [ "$theme_name" != "sugar-candy" ] && [ "$theme_name" != "sugar-candy-git" ]; then
+  echo "Tip: install a richer SDDM theme package (e.g. sugar-candy) and rerun this script."
+fi
 echo "Restart to see it on next login screen, or run: sudo systemctl restart sddm"

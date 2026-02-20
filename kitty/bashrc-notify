@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+# Keep normal user shell config behavior.
+if [ -f "$HOME/.bashrc" ]; then
+  # shellcheck disable=SC1090
+  source "$HOME/.bashrc"
+fi
+
+# Only for interactive shells.
+case "$-" in
+  *i*) ;;
+  *) return 0 2>/dev/null || exit 0 ;;
+esac
+
+__kn_preexec() {
+  # Avoid re-entry while a command is running.
+  [ -n "${__kn_in_command:-}" ] && return 0
+
+  # Ignore shell internals.
+  case "$BASH_COMMAND" in
+    __kn_*|history*|fc*|notify-send*|trap*|PROMPT_COMMAND*|precmd*|preexec*)
+      return 0
+      ;;
+  esac
+
+  __kn_last_cmd="$BASH_COMMAND"
+  __kn_start_time=$SECONDS
+  __kn_in_command=1
+}
+
+__kn_precmd() {
+  local exit_code=$?
+  local current_cmd="${__kn_last_cmd:-command}"
+
+  if [ -n "${__kn_in_command:-}" ]; then
+    local duration=$((SECONDS - __kn_start_time))
+    local title="Command finished"
+    local body
+
+    if [ "$exit_code" -eq 0 ]; then
+      body="OK (${duration}s): ${current_cmd}"
+    else
+      body="Failed (${duration}s, code ${exit_code}): ${current_cmd}"
+    fi
+
+    command -v notify-send >/dev/null 2>&1 && notify-send "$title" "$body"
+    unset __kn_in_command
+  fi
+
+  return "$exit_code"
+}
+
+trap '__kn_preexec' DEBUG
+PROMPT_COMMAND="__kn_precmd${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
