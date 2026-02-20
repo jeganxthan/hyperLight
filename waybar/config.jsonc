@@ -22,7 +22,7 @@
     },
 
     "clock": {
-        "format": "  {:%a %d %b  %I:%M %p}",
+        "format": "  {:%a %d %b  %H:%M}",
         "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt>{calendar}</tt>",
         "interval": 1
     },
