@@ -1,0 +1,61 @@
+# =========================
+# System / OS
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Editor / Cache / Temp
+# =========================
+*.log
+*.tmp
+*.cache
+*.bak
+*.old
+*.swp
+*.swo
+*.orig
+*.rej
+.history/
+.vscode/
+
+# =========================
+# Personal App Data (exclude from repo)
+# =========================
+BraveSoftware/
+google-chrome/
+Google/
+mozilla/
+Code/
+.android/
+*.avd/
+*.img
+.gradle/
+local.properties
+
+# =========================
+# Runtime / Local Machine State
+# =========================
+session/
+pulse/
+dconf/
+QtProject.conf
+kwalletrc
+yay/
+user-dirs.dirs
+user-dirs.locale
+trashrc
+baloofileinformationrc
+
+# =========================
+# Build Outputs
+# =========================
+node_modules/
+dist/
+build/
+coverage/
+
+# =========================
+# Local Backups
+# =========================
+*.bak_codex_*

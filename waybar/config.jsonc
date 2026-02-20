@@ -1,0 +1,74 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 5,
+    "margin-top": 6,
+    "margin-left": 8,
+    "margin-right": 8,
+
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "pulseaudio", "network", "custom/bluetooth", "battery"],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        }
+    },
+
+    "clock": {
+        "format": "  {:%a %d %b  %I:%M %p}",
+        "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt>{calendar}</tt>",
+        "interval": 1
+    },
+
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "  muted",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "scroll-step": 5
+    },
+
+    "network": {
+        "format-wifi": "  {signalStrength}%",
+        "format-ethernet": "󰈀  connected",
+        "format-disconnected": "󰖪  offline",
+        "tooltip-format": "{ifname} via {gwaddr}"
+    },
+
+    "custom/bluetooth": {
+        "return-type": "json",
+        "exec": "/home/jegan/.config/waybar/scripts/bluetooth-status.sh",
+        "interval": 5,
+        "on-click": "sh -c 'command -v blueman-manager >/dev/null && blueman-manager || command -v blueberry >/dev/null && blueberry || command -v gnome-control-center >/dev/null && gnome-control-center bluetooth'",
+        "on-click-right": "sh -c 'if bluetoothctl show | grep -q \"Powered: yes\"; then bluetoothctl power off; else bluetoothctl power on; fi'"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "  {capacity}%",
+        "format-plugged": "  {capacity}%",
+        "format-icons": ["", "", "", "", ""]
+    },
+
+    "tray": {
+        "spacing": 6
+    }
+}

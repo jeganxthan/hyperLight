@@ -1,0 +1,35 @@
+window {
+    background: rgba(10, 14, 22, 0.72);
+    border-radius: 14px;
+    border: 1px solid rgba(23, 147, 209, 0.8);
+}
+
+#container {
+    margin: 14px 16px;
+}
+
+image {
+    -gtk-icon-size: 20px;
+    color: #e6edf3;
+}
+
+label {
+    color: #dce6ef;
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 13px;
+}
+
+progressbar,
+trough {
+    min-height: 10px;
+    border-radius: 999px;
+}
+
+trough {
+    background-color: rgba(255, 255, 255, 0.16);
+}
+
+progressbar progress {
+    background: linear-gradient(90deg, #1793d1 0%, #0f6f9f 100%);
+    border-radius: 999px;
+}

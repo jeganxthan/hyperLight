@@ -1,0 +1,33 @@
+/* Nautilus / libadwaita override */
+@define-color window_bg_color rgba(10, 14, 22, 0.80);
+@define-color view_bg_color rgba(10, 14, 22, 0.74);
+@define-color headerbar_bg_color rgba(14, 21, 32, 0.72);
+@define-color headerbar_backdrop_color rgba(14, 21, 32, 0.62);
+@define-color sidebar_bg_color rgba(12, 20, 31, 0.62);
+@define-color accent_bg_color rgba(23, 147, 209, 0.85);
+@define-color accent_color #1793d1;
+@define-color accent_fg_color #ffffff;
+
+window.background,
+window.background.csd,
+navigation-view,
+splitview {
+    background: @window_bg_color;
+}
+
+headerbar {
+    background: @headerbar_bg_color;
+    border-bottom: 1px solid rgba(37, 53, 71, 0.55);
+}
+
+.navigation-sidebar,
+scrolledwindow.sidebar {
+    background: @sidebar_bg_color;
+}
+
+list row:selected,
+columnview row:selected,
+treeview.view:selected {
+    background: @accent_bg_color;
+    color: @accent_fg_color;
+}

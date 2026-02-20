@@ -1,0 +1,82 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 14px;
+}
+
+window {
+    margin: 0;
+    padding: 14px;
+    border: 1px solid rgba(23, 147, 209, 0.78);
+    border-radius: 16px;
+    background-color: rgba(10, 14, 22, 0.52);
+    color: #e6edf3;
+}
+
+#outer-box {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+#input {
+    margin: 0 0 12px 0;
+    padding: 11px 14px;
+    border: 1px solid rgba(23, 147, 209, 0.45);
+    border-radius: 11px;
+    background-color: rgba(15, 24, 36, 0.74);
+    color: #e6edf3;
+    caret-color: #1793d1;
+}
+
+#input:focus {
+    border-color: rgba(23, 147, 209, 0.95);
+    background-color: rgba(16, 27, 40, 0.85);
+}
+
+#scroll {
+    margin: 0;
+    border: none;
+}
+
+#inner-box {
+    margin: 0;
+    padding: 2px;
+    background-color: transparent;
+}
+
+#entry {
+    margin: 3px 0;
+    padding: 9px 12px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.02);
+    color: #c9d7e4;
+}
+
+#entry:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+#entry:hover {
+    border-color: rgba(23, 147, 209, 0.45);
+    background-color: rgba(23, 147, 209, 0.14);
+    color: #f7fbff;
+}
+
+#entry image {
+    margin-right: 12px;
+}
+
+#entry:selected {
+    border-color: rgba(23, 147, 209, 1);
+    background: linear-gradient(90deg, rgba(23, 147, 209, 0.95) 0%, rgba(15, 111, 159, 0.95) 100%);
+    color: #ffffff;
+}
+
+#text {
+    color: inherit;
+}
+
+#text:selected {
+    color: #ffffff;
+}

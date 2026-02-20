@@ -1,0 +1,65 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
+    font-size: 12px;
+}
+
+window#waybar {
+    background: transparent;
+    color: #dce6ef;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: rgba(10, 14, 22, 0.62);
+    border: 1px solid rgba(23, 147, 209, 0.72);
+    border-radius: 10px;
+    padding: 1px 6px;
+}
+
+#workspaces button {
+    min-width: 20px;
+    margin: 2px 2px;
+    border-radius: 7px;
+    padding: 0 5px;
+    color: #89a2b8;
+    background: transparent;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    color: #ffffff;
+    background: linear-gradient(90deg, #1793d1 0%, #0f6f9f 100%);
+}
+
+#workspaces button:hover {
+    color: #ffffff;
+    background: rgba(23, 147, 209, 0.24);
+}
+
+#clock,
+#battery,
+#network,
+#custom-bluetooth,
+#pulseaudio,
+#tray {
+    margin: 2px 2px;
+    border-radius: 7px;
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+#battery.warning {
+    color: #ffd580;
+}
+
+#battery.critical {
+    color: #ff6b6b;
+}
+
+tooltip {
+    background: rgba(10, 14, 22, 0.95);
+    color: #dce6ef;
+    border: 1px solid rgba(23, 147, 209, 0.8);
+    border-radius: 10px;
+}

@@ -1,0 +1,24 @@
+/* GTK3 companion theme */
+@define-color theme_bg_color rgba(10, 14, 22, 0.82);
+@define-color theme_base_color rgba(10, 14, 22, 0.74);
+@define-color theme_selected_bg_color rgba(23, 147, 209, 0.85);
+@define-color theme_selected_fg_color #ffffff;
+@define-color theme_text_color #dce6ef;
+@define-color theme_fg_color #dce6ef;
+@define-color borders rgba(37, 53, 71, 0.55);
+
+window,
+.background {
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+}
+
+headerbar {
+    background: rgba(14, 21, 32, 0.72);
+    border-bottom: 1px solid @borders;
+}
+
+.sidebar {
+    background: rgba(12, 20, 31, 0.62);
+    border-right: 1px solid @borders;
+}

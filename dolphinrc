@@ -1,0 +1,34 @@
+MenuBar=Disabled
+
+[CompactMode]
+PreviewSize=24
+
+[DetailsMode]
+PreviewSize=24
+
+[General]
+BrowseThroughArchives=true
+ConfirmClosingMultipleTabs=true
+EditableUrl=true
+RememberOpenedTabs=false
+ShowFullPathInTitlebar=true
+ShowToolTips=true
+Version=202
+ViewPropsTimestamp=2026,2,20,3,11,28.975
+
+[IconsMode]
+IconSize=48
+PreviewSize=64
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[PlacesPanel]
+IconSize=22
+
+[UiSettings]
+ColorScheme=KvAdaptaDark
