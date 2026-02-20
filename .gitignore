@@ -10,14 +10,19 @@ Thumbs.db
 *.log
 *.tmp
 *.cache
+*.pid
+*.lock
 *.bak
 *.old
 *.swp
 *.swo
 *.orig
 *.rej
+.directory
+.Trash-*/
 .history/
 .vscode/
+.idea/
 
 # =========================
 # Personal App Data (exclude from repo)
@@ -30,8 +35,12 @@ Code/
 .android/
 *.avd/
 *.img
+.local/share/Trash/
+.cache/
 .gradle/
 local.properties
+Electron/
+Kingsoft/
 
 # =========================
 # Runtime / Local Machine State
@@ -46,6 +55,8 @@ user-dirs.dirs
 user-dirs.locale
 trashrc
 baloofileinformationrc
+mimeapps.list
+.xsession-errors*
 
 # =========================
 # Build Outputs
@@ -54,6 +65,16 @@ node_modules/
 dist/
 build/
 coverage/
+tmp/
+temp/
+
+# =========================
+# Unrelated Projects / Toolchains
+# =========================
+Antigravity/
+go/
+nvm/
+systemd/user/default.target.wants/
 
 # =========================
 # Local Backups

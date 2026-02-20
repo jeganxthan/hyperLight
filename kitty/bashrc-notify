@@ -12,43 +12,43 @@ case "$-" in
   *) return 0 2>/dev/null || exit 0 ;;
 esac
 
-__kn_preexec() {
-  # Avoid re-entry while a command is running.
-  [ -n "${__kn_in_command:-}" ] && return 0
-
-  # Ignore shell internals.
-  case "$BASH_COMMAND" in
-    __kn_*|history*|fc*|notify-send*|trap*|PROMPT_COMMAND*|precmd*|preexec*)
-      return 0
-      ;;
-  esac
-
-  __kn_last_cmd="$BASH_COMMAND"
-  __kn_start_time=$SECONDS
-  __kn_in_command=1
-}
+__kn_min_seconds=5
+__kn_last_hist="${HISTCMD:-0}"
+__kn_last_prompt_seconds=$SECONDS
 
 __kn_precmd() {
   local exit_code=$?
-  local current_cmd="${__kn_last_cmd:-command}"
+  local current_hist="${HISTCMD:-0}"
+  local duration=$((SECONDS - __kn_last_prompt_seconds))
+  __kn_last_prompt_seconds=$SECONDS
 
-  if [ -n "${__kn_in_command:-}" ]; then
-    local duration=$((SECONDS - __kn_start_time))
-    local title="Command finished"
-    local body
+  # Only react when a new history entry was added (real typed command).
+  [ "$current_hist" -gt "$__kn_last_hist" ] || return "$exit_code"
 
-    if [ "$exit_code" -eq 0 ]; then
-      body="OK (${duration}s): ${current_cmd}"
-    else
-      body="Failed (${duration}s, code ${exit_code}): ${current_cmd}"
-    fi
+  local cmd
+  cmd="$(history 1 | sed -E 's/^[[:space:]]*[0-9]+[[:space:]]+//; s/[[:space:]]+$//')"
+  __kn_last_hist="$current_hist"
 
-    command -v notify-send >/dev/null 2>&1 && notify-send "$title" "$body"
-    unset __kn_in_command
+  # Ignore interrupted commands and short commands.
+  [ "$exit_code" -eq 130 ] && return "$exit_code"
+  [ "$duration" -ge "$__kn_min_seconds" ] || return "$exit_code"
+
+  # Ignore trivial commands and VS Code shell-integration internals.
+  [[ -z "$cmd" ]] && return "$exit_code"
+  [[ "$cmd" =~ ^(ls|cd|pwd|clear|history|fc|exit|true|false)([[:space:]].*)?$ ]] && return "$exit_code"
+  [[ "$cmd" =~ __ksi_prompt_command ]] && return "$exit_code"
+  [[ "$cmd" =~ ^(builtin[[:space:]]+)?declare[[:space:]]+-F ]] && return "$exit_code"
+
+  local title="Command finished"
+  local body
+  if [ "$exit_code" -eq 0 ]; then
+    body="OK (${duration}s): ${cmd}"
+  else
+    body="Failed (${duration}s, code ${exit_code}): ${cmd}"
   fi
 
+  command -v notify-send >/dev/null 2>&1 && notify-send "$title" "$body"
   return "$exit_code"
 }
 
-trap '__kn_preexec' DEBUG
 PROMPT_COMMAND="__kn_precmd${PROMPT_COMMAND:+; $PROMPT_COMMAND}"

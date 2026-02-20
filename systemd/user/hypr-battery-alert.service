@@ -1,0 +1,13 @@
+[Unit]
+Description=Hypr battery notifications
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/jegan/.config/hypr/scripts/battery-alert.sh
+Restart=always
+RestartSec=3
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=%t/bus
+
+[Install]
+WantedBy=default.target
