@@ -22,3 +22,21 @@ headerbar {
     background: rgba(12, 20, 31, 0.62);
     border-right: 1px solid @borders;
 }
+
+/* Nautilus list view transparency + light text (GTK3 fallback) */
+treeview,
+treeview.view,
+.view {
+    background-color: rgba(10, 14, 22, 0.56);
+    color: #e6edf3;
+}
+
+treeview.view:selected,
+treeview:selected {
+    background-color: rgba(23, 147, 209, 0.85);
+    color: #ffffff;
+}
+
+treeview.view:hover {
+    background-color: rgba(23, 147, 209, 0.22);
+}

@@ -31,3 +31,40 @@ treeview.view:selected {
     background: @accent_bg_color;
     color: @accent_fg_color;
 }
+
+/* Nautilus list/column view transparency + readable text */
+.nautilus-window .view,
+.nautilus-window listview,
+.nautilus-window columnview,
+.nautilus-window treeview {
+    background: rgba(10, 14, 22, 0.56);
+    color: #e6edf3;
+}
+
+.nautilus-window columnview row,
+.nautilus-window listview row {
+    background: rgba(255, 255, 255, 0.03);
+    color: #e6edf3;
+}
+
+.nautilus-window columnview row:hover,
+.nautilus-window listview row:hover {
+    background: rgba(23, 147, 209, 0.22);
+}
+
+.nautilus-window columnview row:selected,
+.nautilus-window listview row:selected {
+    background: rgba(23, 147, 209, 0.85);
+    color: #ffffff;
+}
+
+.nautilus-window columnview header button {
+    background: rgba(14, 21, 32, 0.78);
+    color: #dce6ef;
+    border-color: rgba(37, 53, 71, 0.65);
+}
+
+.nautilus-window label,
+.nautilus-window .dim-label {
+    color: #dce6ef;
+}
