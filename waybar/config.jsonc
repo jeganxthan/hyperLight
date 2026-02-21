@@ -53,7 +53,7 @@
         "return-type": "json",
         "exec": "/home/jegan/.config/waybar/scripts/bluetooth-status.sh",
         "interval": 5,
-        "on-click": "sh -c 'command -v blueman-manager >/dev/null && blueman-manager || command -v blueberry >/dev/null && blueberry || command -v gnome-control-center >/dev/null && gnome-control-center bluetooth'",
+        "on-click": "/home/jegan/.config/hypr/scripts/bluetooth-manager.sh",
         "on-click-right": "sh -c 'if bluetoothctl show | grep -q \"Powered: yes\"; then bluetoothctl power off; else bluetoothctl power on; fi'"
     },
 

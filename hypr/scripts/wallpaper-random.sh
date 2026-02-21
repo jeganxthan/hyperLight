@@ -27,11 +27,8 @@ mapfile -d '' images < <(find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -ina
 
 wallpaper="$(printf '%s\n' "${images[@]}" | shuf -n 1)"
 
-if command -v hyprctl >/dev/null 2>&1; then
-  pgrep -x hyprpaper >/dev/null 2>&1 || (hyprpaper >/dev/null 2>&1 & sleep 0.4)
-  hyprctl hyprpaper preload "$wallpaper" >/dev/null 2>&1 || true
-  hyprctl hyprpaper wallpaper ",$wallpaper" >/dev/null 2>&1 || true
-  hyprctl hyprpaper unload unused >/dev/null 2>&1 || true
+if [ -x "$HOME/.config/hypr/scripts/wallpaper-apply.sh" ]; then
+  "$HOME/.config/hypr/scripts/wallpaper-apply.sh" "$wallpaper"
   exit 0
 fi
 

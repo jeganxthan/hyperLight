@@ -1,32 +1,31 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+sleep_after_lock_s="${1:-}"
+
 if pgrep -x hyprlock >/dev/null 2>&1; then
   exit 0
 fi
 
-dpms_timer_pid=""
-if command -v hyprctl >/dev/null 2>&1; then
-  # If lock screen is still active after 40s, turn displays off.
+sleep_timer_pid=""
+if [[ "$sleep_after_lock_s" =~ ^[0-9]+$ ]] && [ "$sleep_after_lock_s" -gt 0 ]; then
   (
-    sleep 40
+    sleep "$sleep_after_lock_s"
     if pgrep -x hyprlock >/dev/null 2>&1; then
-      hyprctl dispatch dpms off >/dev/null 2>&1 || true
+      systemctl suspend >/dev/null 2>&1 || loginctl suspend >/dev/null 2>&1 || true
     fi
   ) &
-  dpms_timer_pid=$!
+  sleep_timer_pid=$!
 fi
 
 if command -v hyprlock >/dev/null 2>&1; then
   if hyprlock -c /home/jegan/.config/hypr/hyprlock.conf; then
-    [ -n "$dpms_timer_pid" ] && kill "$dpms_timer_pid" >/dev/null 2>&1 || true
-    command -v hyprctl >/dev/null 2>&1 && hyprctl dispatch dpms on >/dev/null 2>&1 || true
+    [ -n "$sleep_timer_pid" ] && kill "$sleep_timer_pid" >/dev/null 2>&1 || true
     exit 0
   fi
 fi
 
-[ -n "$dpms_timer_pid" ] && kill "$dpms_timer_pid" >/dev/null 2>&1 || true
-command -v hyprctl >/dev/null 2>&1 && hyprctl dispatch dpms on >/dev/null 2>&1 || true
+[ -n "$sleep_timer_pid" ] && kill "$sleep_timer_pid" >/dev/null 2>&1 || true
 
 if command -v loginctl >/dev/null 2>&1; then
   loginctl lock-session
