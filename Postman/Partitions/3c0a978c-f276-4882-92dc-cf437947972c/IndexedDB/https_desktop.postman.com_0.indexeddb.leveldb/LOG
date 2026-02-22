@@ -1,0 +1,15 @@
+2026/02/22-13:18:55.521 11a58 Reusing MANIFEST /home/jegan/.config/Postman/Partitions/3c0a978c-f276-4882-92dc-cf437947972c/IndexedDB/https_desktop.postman.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/02/22-13:18:55.523 11a58 Recovering log #11
+2026/02/22-13:18:55.542 11a58 Reusing old log /home/jegan/.config/Postman/Partitions/3c0a978c-f276-4882-92dc-cf437947972c/IndexedDB/https_desktop.postman.com_0.indexeddb.leveldb/000011.log 
+2026/02/22-13:18:55.543 11a58 Delete type=2 #10
+2026/02/22-13:19:01.309 11a57 Manual compaction at level-0 from '\x00\x0a\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0b\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/02/22-13:19:01.364 11a57 Level-0 table #16: started
+2026/02/22-13:19:01.384 11a57 Level-0 table #16: 96103 bytes OK
+2026/02/22-13:19:01.387 11a57 Delete type=0 #11
+2026/02/22-13:19:01.389 11a57 Manual compaction at level-0 from '\x00\x0b\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0c\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0b\x00\x00\x05' @ 5355 : 1
+2026/02/22-13:19:01.389 11a57 Compacting 1@0 + 1@1 files
+2026/02/22-13:19:01.407 11a57 Generated table #17@0: 2568 keys, 41100 bytes
+2026/02/22-13:19:01.408 11a57 Compacted 1@0 + 1@1 files => 41100 bytes
+2026/02/22-13:19:01.412 11a57 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/02/22-13:19:01.413 11a57 Delete type=2 #16
+2026/02/22-13:19:01.413 11a57 Manual compaction at level-0 from '\x00\x0b\x00\x00\x05' @ 5355 : 1 .. '\x00\x0c\x00\x00\x00' @ 0 : 0; will stop at (end)

@@ -38,7 +38,11 @@ selection="$(
       # Wofi image escape syntax. Shows thumbnail and keeps filename text.
       printf 'img:%s:text:%s\n' "$img" "$rel"
     done
-  } | wofi --dmenu --allow-images --allow-markup --prompt "Wallpaper Picker" --style "$HOME/.config/wofi/style-wallpicker.css"
+  } | wofi --dmenu --allow-images --allow-markup \
+      --prompt "Wallpaper Picker" \
+      --style "$HOME/.config/wofi/style-wallpicker.css" \
+      --define "allow_images=true" \
+      --define "image_size=196"
 )"
 [ -n "${selection:-}" ] || exit 0
 
