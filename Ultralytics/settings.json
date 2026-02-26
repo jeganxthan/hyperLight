@@ -1,0 +1,21 @@
+{
+  "settings_version": "0.0.6",
+  "datasets_dir": "/home/jegan/Desktop/Personal/datasets",
+  "weights_dir": "/home/jegan/Desktop/Personal/Main-project/weights",
+  "runs_dir": "/home/jegan/Desktop/Personal/Main-project/runs",
+  "uuid": "e68145e14b5c4a03e4d18befd23d3bbd2d8c49c80ef71464f31c0d05afdfb897",
+  "sync": true,
+  "api_key": "",
+  "openai_api_key": "",
+  "clearml": true,
+  "comet": true,
+  "dvc": true,
+  "hub": true,
+  "mlflow": true,
+  "neptune": true,
+  "raytune": true,
+  "tensorboard": false,
+  "wandb": false,
+  "vscode_msg": true,
+  "openvino_msg": true
+}

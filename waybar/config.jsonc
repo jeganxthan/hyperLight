@@ -9,7 +9,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "pulseaudio", "network", "custom/bluetooth", "battery"],
+    "modules-right": ["tray", "pulseaudio", "network", "custom/bluetooth", "custom/screenrec", "battery"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -55,6 +55,14 @@
         "interval": 5,
         "on-click": "/home/jegan/.config/hypr/scripts/bluetooth-manager.sh",
         "on-click-right": "sh -c 'if bluetoothctl show | grep -q \"Powered: yes\"; then bluetoothctl power off; else bluetoothctl power on; fi'"
+    },
+
+    "custom/screenrec": {
+        "return-type": "json",
+        "exec-if": "pgrep -x wf-recorder >/dev/null",
+        "exec": "/home/jegan/.config/waybar/scripts/screenrec-status.sh",
+        "interval": 1,
+        "on-click": "/home/jegan/.config/hypr/scripts/screenrec-toggle.sh"
     },
 
     "battery": {

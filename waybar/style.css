@@ -41,12 +41,19 @@ window#waybar {
 #battery,
 #network,
 #custom-bluetooth,
+#custom-screenrec,
 #pulseaudio,
 #tray {
     margin: 2px 2px;
     border-radius: 7px;
     padding: 2px 8px;
     background: rgba(255, 255, 255, 0.03);
+}
+
+#custom-screenrec.recording {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.13);
+    border: 1px solid rgba(255, 107, 107, 0.7);
 }
 
 #battery.warning {
