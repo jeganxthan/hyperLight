@@ -1,72 +1,192 @@
+/* ╔═══════════════════════════════════════════════════════════╗
+   ║   Waybar — Void Ribbon  · Slim Edition                   ║
+   ║   28px tall · Three micro islands · Pure transparent     ║
+   ╚═══════════════════════════════════════════════════════════╝ */
+
 * {
-    font-family: "JetBrainsMono Nerd Font", "Noto Sans", sans-serif;
-    font-size: 12px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
 }
 
+/* ── Bar root ────────────────────────────────────────────── */
 window#waybar {
-    background: transparent;
-    color: #e0e0e0;
+    background-color: transparent;
+    color: rgba(210, 212, 224, 0.92);
+    border: none;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-    background: rgba(12, 12, 12, 0.7);
-    border: 1px solid rgba(130, 130, 130, 0.65);
+/* ── Left island ─────────────────────────────────────────── */
+.modules-left {
+    background-color: rgba(8, 8, 12, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 10px;
-    padding: 1px 6px;
+    padding: 1px 3px;
+    margin: 5px 0 5px 8px;
+}
+
+/* ── Center island ───────────────────────────────────────── */
+.modules-center {
+    background-color: rgba(6, 6, 10, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 1px 4px;
+    margin: 4px 0;
+}
+
+/* ── Right island ────────────────────────────────────────── */
+.modules-right {
+    background-color: rgba(8, 8, 12, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 1px 3px;
+    margin: 5px 8px 5px 0;
+}
+
+/* ── Workspaces ──────────────────────────────────────────── */
+#workspaces {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 
 #workspaces button {
-    min-width: 20px;
-    margin: 2px 2px;
+    min-width: 8px;
+    margin: 0 2px;
+    padding: 4px 6px;
     border-radius: 7px;
-    padding: 0 5px;
-    color: #9c9c9c;
-    background: transparent;
-    transition: all 0.2s ease;
+    border: none;
+    background-color: transparent;
+    color: rgba(75, 77, 96, 0.70);
+    font-size: 11px;
 }
 
 #workspaces button.active {
-    color: #ffffff;
-    background: linear-gradient(90deg, #525252 0%, #3a3a3a 100%);
+    color: rgba(220, 222, 238, 0.96);
+    background-color: rgba(255, 255, 255, 0.09);
+    border-radius: 7px;
+    padding: 4px 9px;
+    font-weight: 600;
+}
+
+#workspaces button.occupied {
+    color: rgba(138, 140, 162, 0.65);
 }
 
 #workspaces button:hover {
-    color: #ffffff;
-    background: rgba(180, 180, 180, 0.18);
+    color: rgba(195, 197, 215, 0.88);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-#clock,
+#workspaces button.urgent {
+    color: rgba(255, 160, 150, 0.96);
+    background-color: rgba(255, 65, 52, 0.12);
+}
+
+/* ── Clock ───────────────────────────────────────────────── */
+#clock {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(220, 222, 236, 0.95);
+    background-color: transparent;
+    border: none;
+    padding: 3px 10px;
+    margin: 0;
+}
+
+/* ── All right-side modules ──────────────────────────────── */
 #battery,
 #network,
+#pulseaudio,
+#bluetooth,
 #custom-bluetooth,
 #custom-screenrec,
-#pulseaudio,
+#cpu,
+#memory,
+#temperature,
+#backlight,
+#idle_inhibitor,
 #tray {
-    margin: 2px 2px;
+    background-color: rgba(255, 255, 255, 0.034);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 7px;
-    padding: 2px 8px;
-    background: rgba(255, 255, 255, 0.05);
+    color: rgba(165, 167, 188, 0.82);
+    margin: 2px 1px;
+    padding: 1px 7px;
+    font-size: 11px;
 }
 
+/* ── Battery ─────────────────────────────────────────────── */
+#battery.charging {
+    color: rgba(158, 210, 158, 0.94);
+    background-color: rgba(110, 192, 110, 0.07);
+    border-color: rgba(110, 192, 110, 0.18);
+}
+
+#battery.warning:not(.charging) {
+    color: rgba(238, 204, 118, 0.95);
+    background-color: rgba(215, 168, 44, 0.08);
+    border-color: rgba(215, 168, 44, 0.25);
+}
+
+#battery.critical:not(.charging) {
+    color: rgba(252, 140, 130, 0.97);
+    background-color: rgba(252, 58, 46, 0.11);
+    border-color: rgba(252, 58, 46, 0.34);
+}
+
+/* ── Network ─────────────────────────────────────────────── */
+#network.disconnected,
+#network.disabled {
+    color: rgba(105, 107, 128, 0.42);
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Audio ───────────────────────────────────────────────── */
+#pulseaudio.muted {
+    color: rgba(98, 100, 120, 0.44);
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Screen recording ────────────────────────────────────── */
 #custom-screenrec.recording {
-    color: #ff6b6b;
-    background: rgba(255, 107, 107, 0.13);
-    border: 1px solid rgba(255, 107, 107, 0.7);
+    color: rgba(252, 140, 130, 0.97);
+    background-color: rgba(252, 54, 42, 0.11);
+    border-color: rgba(252, 54, 42, 0.38);
 }
 
-#battery.warning {
-    color: #ffd580;
+/* ── Idle inhibitor ──────────────────────────────────────── */
+#idle_inhibitor.activated {
+    color: rgba(165, 210, 165, 0.93);
+    background-color: rgba(110, 188, 110, 0.08);
+    border-color: rgba(110, 188, 110, 0.20);
 }
 
-#battery.critical {
-    color: #ff6b6b;
+/* ── Tray ────────────────────────────────────────────────── */
+#tray {
+    padding: 1px 6px;
 }
 
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* ── Tooltip ─────────────────────────────────────────────── */
 tooltip {
-    background: rgba(14, 14, 14, 0.96);
-    color: #e0e0e0;
-    border: 1px solid rgba(130, 130, 130, 0.7);
-    border-radius: 10px;
+    background-color: rgba(7, 7, 11, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9px;
+    padding: 5px 11px;
+    color: rgba(195, 197, 214, 0.90);
+}
+
+tooltip label {
+    color: rgba(195, 197, 214, 0.90);
+    font-size: 11px;
 }

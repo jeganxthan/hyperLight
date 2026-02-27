@@ -41,6 +41,9 @@ selection="$(
   } | wofi --dmenu --allow-images --allow-markup \
       --prompt "Wallpaper Picker" \
       --style "$HOME/.config/wofi/style-wallpicker.css" \
+      --width 1240 \
+      --height 720 \
+      --hide-scroll \
       --define "allow_images=true" \
       --define "image_size=196"
 )"

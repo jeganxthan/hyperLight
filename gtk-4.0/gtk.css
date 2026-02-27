@@ -1,70 +1,388 @@
-/* Nautilus / libadwaita override */
-@define-color window_bg_color rgba(10, 14, 22, 0.80);
-@define-color view_bg_color rgba(10, 14, 22, 0.74);
-@define-color headerbar_bg_color rgba(14, 21, 32, 0.72);
-@define-color headerbar_backdrop_color rgba(14, 21, 32, 0.62);
-@define-color sidebar_bg_color rgba(12, 20, 31, 0.62);
-@define-color accent_bg_color rgba(23, 147, 209, 0.85);
-@define-color accent_color #1793d1;
-@define-color accent_fg_color #ffffff;
+/* ╔═══════════════════════════════════════════════════════════╗
+   ║  GTK3 — Smoked Glass                                     ║
+   ║  Targets Thunar · matches wofi · dunst · kitty           ║
+   ╚═══════════════════════════════════════════════════════════╝ */
 
-window.background,
-window.background.csd,
-navigation-view,
-splitview {
-    background: @window_bg_color;
+/* ── Global reset ────────────────────────────────────────── */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+    -gtk-icon-style: regular;
 }
 
-headerbar {
-    background: @headerbar_bg_color;
-    border-bottom: 1px solid rgba(37, 53, 71, 0.55);
+/* ── Window base ─────────────────────────────────────────── */
+window,
+.background {
+    background-color: rgba(6, 6, 10, 0.70);
+    color: #c8c8d4;
 }
 
-.navigation-sidebar,
-scrolledwindow.sidebar {
-    background: @sidebar_bg_color;
+/* ── Headerbar / toolbar ─────────────────────────────────── */
+headerbar,
+.titlebar {
+    background-color: #08080d;
+    border-bottom: 1px solid #1a1a22;
+    color: #c8c8d4;
+    box-shadow: none;
+    padding: 4px 8px;
+    min-height: 36px;
 }
 
-list row:selected,
-columnview row:selected,
-treeview.view:selected {
-    background: @accent_bg_color;
-    color: @accent_fg_color;
+headerbar .title {
+    font-weight: 500;
+    font-size: 11px;
+    color: #dcdce4;
+    letter-spacing: 0.04em;
 }
 
-/* Nautilus list/column view transparency + readable text */
-.nautilus-window .view,
-.nautilus-window listview,
-.nautilus-window columnview,
-.nautilus-window treeview {
-    background: rgba(10, 14, 22, 0.56);
-    color: #e6edf3;
+headerbar button,
+.titlebar button {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 7px;
+    color: #808090;
+    padding: 3px 7px;
+    box-shadow: none;
+    min-height: 0;
+    min-width: 0;
 }
 
-.nautilus-window columnview row,
-.nautilus-window listview row {
-    background: rgba(255, 255, 255, 0.03);
-    color: #e6edf3;
+headerbar button:hover,
+.titlebar button:hover {
+    background-color: #1a1a24;
+    border-color: #2a2a34;
+    color: #c8c8d4;
 }
 
-.nautilus-window columnview row:hover,
-.nautilus-window listview row:hover {
-    background: rgba(23, 147, 209, 0.22);
+headerbar button:active,
+.titlebar button:active {
+    background-color: #22222e;
+    color: #dcdce4;
 }
 
-.nautilus-window columnview row:selected,
-.nautilus-window listview row:selected {
-    background: rgba(23, 147, 209, 0.85);
-    color: #ffffff;
+/* close / min / max buttons */
+headerbar button.titlebutton {
+    padding: 4px;
+    border-radius: 50%;
+    color: #505060;
 }
 
-.nautilus-window columnview header button {
-    background: rgba(14, 21, 32, 0.78);
-    color: #dce6ef;
-    border-color: rgba(37, 53, 71, 0.65);
+headerbar button.titlebutton:hover {
+    background-color: #2a2a36;
+    color: #9090a4;
 }
 
-.nautilus-window label,
-.nautilus-window .dim-label {
-    color: #dce6ef;
+/* ── Toolbar (location bar etc.) ─────────────────────────── */
+toolbar,
+.toolbar {
+    background-color: #08080d;
+    border-bottom: 1px solid #14141c;
+    padding: 2px 6px;
+}
+
+/* ── Location / path entry ───────────────────────────────── */
+entry,
+.path-bar,
+ThunarLocationEntry {
+    background-color: #0e0e16;
+    border: 1px solid #1e1e28;
+    border-radius: 8px;
+    color: #c8c8d4;
+    padding: 4px 10px;
+    caret-color: #8080a0;
+    box-shadow: none;
+}
+
+entry:focus {
+    border-color: #3a3a48;
+    background-color: #10101a;
+    box-shadow: 0 0 0 2px #1a1a2800;
+}
+
+entry selection {
+    background-color: #2a2a38;
+    color: #e8e8f0;
+}
+
+/* ── Sidebar (shortcuts pane) ────────────────────────────── */
+.sidebar,
+placessidebar,
+.placessidebar {
+    background-color: #08080c;
+    border-right: 1px solid #14141c;
+    color: #808090;
+}
+
+.sidebar row,
+placessidebar row {
+    padding: 3px 6px;
+    border-radius: 7px;
+    margin: 1px 4px;
+    color: #808090;
+    min-height: 28px;
+}
+
+.sidebar row:hover,
+placessidebar row:hover {
+    background-color: #14141e;
+    color: #b0b0c0;
+}
+
+.sidebar row:selected,
+placessidebar row:selected,
+.sidebar row.selected,
+placessidebar row.selected {
+    background-color: #1e1e2a;
+    border-left: 2px solid #5a5a7a;
+    color: #dcdce4;
+}
+
+.sidebar row label,
+placessidebar row label {
+    font-size: 11px;
+    letter-spacing: 0.02em;
+}
+
+/* ── File list / icon view ───────────────────────────────── */
+.view,
+iconview,
+treeview,
+.nautilus-list-view,
+ThunarDetailsView,
+ThunarIconView {
+    background-color: rgba(6, 6, 10, 0.0);
+    color: #b0b0c0;
+    border: none;
+}
+
+/* rows */
+treeview.view row {
+    min-height: 26px;
+    padding: 0 4px;
+    border-radius: 0;
+}
+
+treeview.view row:hover {
+    background-color: #0e0e16;
+    color: #c8c8d4;
+}
+
+treeview.view row:selected {
+    background-color: #1a1a26;
+    color: #dcdce4;
+    border-left: 2px solid #5a5a7a;
+}
+
+treeview.view row:selected:focus {
+    background-color: #1e1e2e;
+    color: #e8e8f0;
+}
+
+/* alternating rows */
+treeview.view row:nth-child(even) {
+    background-color: #08080e;
+}
+
+treeview.view row:nth-child(even):hover {
+    background-color: #0e0e16;
+}
+
+/* column headers */
+treeview header button {
+    background-color: #08080d;
+    border-bottom: 1px solid #1a1a22;
+    border-right: 1px solid #12121a;
+    color: #606070;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    box-shadow: none;
+}
+
+treeview header button:hover {
+    background-color: #0e0e16;
+    color: #9090a4;
+}
+
+/* icon view items */
+iconview item {
+    border-radius: 8px;
+    padding: 6px;
+    color: #a0a0b4;
+}
+
+iconview item:hover {
+    background-color: #0e0e18;
+    color: #c8c8d4;
+}
+
+iconview item:selected {
+    background-color: #1a1a28;
+    color: #dcdce4;
+    border: 1px solid #3a3a50;
+}
+
+/* ── Scrollbars ──────────────────────────────────────────── */
+scrollbar {
+    background-color: transparent;
+    border: none;
+}
+
+scrollbar trough {
+    background-color: #0a0a10;
+    border-radius: 999px;
+    min-width: 4px;
+    min-height: 4px;
+}
+
+scrollbar slider {
+    background-color: #2a2a38;
+    border-radius: 999px;
+    min-width: 4px;
+    min-height: 24px;
+    margin: 2px;
+    transition: background-color 140ms ease;
+}
+
+scrollbar slider:hover  { background-color: #3a3a50; }
+scrollbar slider:active { background-color: #4a4a64; }
+
+/* ── Popup / context menu ────────────────────────────────── */
+menu,
+.context-menu,
+.popup {
+    background-color: #0a0a10;
+    border: 1px solid #1e1e28;
+    border-radius: 10px;
+    padding: 4px;
+    color: #b0b0c4;
+    box-shadow: 0 8px 32px #00000088;
+}
+
+menuitem {
+    border-radius: 7px;
+    padding: 5px 12px;
+    font-size: 11px;
+    color: #a0a0b8;
+    min-height: 0;
+}
+
+menuitem:hover {
+    background-color: #1a1a26;
+    color: #dcdce4;
+}
+
+menuitem:disabled {
+    color: #404050;
+}
+
+separator,
+menu separator {
+    background-color: #1a1a22;
+    min-height: 1px;
+    margin: 3px 6px;
+}
+
+/* ── Statusbar ───────────────────────────────────────────── */
+statusbar,
+.statusbar {
+    background-color: #08080d;
+    border-top: 1px solid #14141c;
+    color: #505060;
+    font-size: 10px;
+    padding: 2px 10px;
+}
+
+/* ── Notebook / tabs ─────────────────────────────────────── */
+notebook > header {
+    background-color: #08080d;
+    border-bottom: 1px solid #14141c;
+}
+
+notebook > header tab {
+    background-color: transparent;
+    border: none;
+    color: #606070;
+    padding: 5px 14px;
+    font-size: 11px;
+}
+
+notebook > header tab:checked {
+    background-color: #0e0e18;
+    color: #dcdce4;
+    border-bottom: 2px solid #5a5a7a;
+}
+
+notebook > header tab:hover {
+    color: #a0a0b8;
+    background-color: #0a0a12;
+}
+
+/* ── Buttons (dialog / generic) ──────────────────────────── */
+button {
+    background-color: #10101a;
+    border: 1px solid #1e1e2a;
+    border-radius: 8px;
+    color: #9090a4;
+    padding: 5px 14px;
+    box-shadow: none;
+    transition: all 160ms ease;
+}
+
+button:hover {
+    background-color: #181824;
+    border-color: #2a2a3a;
+    color: #c8c8d8;
+}
+
+button:active {
+    background-color: #20202e;
+    color: #dcdce8;
+}
+
+button.suggested-action {
+    background-color: #1e1e2e;
+    border-color: #3a3a50;
+    color: #dcdce4;
+}
+
+button.destructive-action {
+    background-color: #1e0e0e;
+    border-color: #4a2020;
+    color: #ff8787;
+}
+
+/* ── Tooltip ─────────────────────────────────────────────── */
+tooltip {
+    background-color: #0a0a10;
+    border: 1px solid #1e1e28;
+    border-radius: 8px;
+    color: #b0b0c4;
+    padding: 4px 10px;
+    font-size: 10.5px;
+}
+
+tooltip label { color: #b0b0c4; }
+
+/* ── Selection highlight ─────────────────────────────────── */
+selection {
+    background-color: #1e1e2e;
+    color: #e8e8f0;
+}
+
+/* ── Checkboxes & radios ─────────────────────────────────── */
+checkbutton check,
+radiobutton radio {
+    background-color: #0e0e18;
+    border: 1px solid #2a2a3a;
+    border-radius: 4px;
+    color: #808094;
+}
+
+checkbutton check:checked,
+radiobutton radio:checked {
+    background-color: #2a2a40;
+    border-color: #5a5a7a;
+    color: #dcdce4;
 }

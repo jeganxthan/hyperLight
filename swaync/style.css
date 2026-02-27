@@ -1,0 +1,371 @@
+/* ╔═══════════════════════════════════════════════════════════╗
+   ║  SwayNC — Smoked Glass                                    ║
+   ║  Matches wofi · dunst · waybar void-ribbon                ║
+   ╚═══════════════════════════════════════════════════════════╝ */
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12px;
+  outline: none;
+  border: none;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+/* ─── Control Center window ──────────────────────────────── */
+.control-center {
+  background: rgba(6, 6, 8, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.13);
+  border-radius: 16px;
+  box-shadow:
+    -24px 0 60px rgba(0, 0, 0, 0.75),
+    0 32px 64px rgba(0, 0, 0, 0.70),
+    0 0 0 1px rgba(0, 0, 0, 0.85);
+  padding: 14px 12px 10px;
+  color: rgba(220, 220, 228, 0.92);
+}
+
+/* ─── Title ──────────────────────────────────────────────── */
+.widget-title {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+}
+
+.widget-title > label {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(110, 110, 125, 0.65);
+}
+
+.widget-title > button {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 7px;
+  color: rgba(130, 130, 145, 0.70);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+}
+
+.widget-title > button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(200, 200, 215, 0.90);
+}
+
+/* ─── Do Not Disturb ─────────────────────────────────────── */
+.widget-dnd {
+  margin: 0 0 8px;
+  padding: 9px 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+}
+
+.widget-dnd > label {
+  font-size: 11px;
+  color: rgba(155, 155, 168, 0.78);
+}
+
+.widget-dnd > switch {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-width: 38px;
+  min-height: 20px;
+}
+
+.widget-dnd > switch:checked {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.20);
+}
+
+.widget-dnd > switch slider {
+  background: rgba(200, 200, 210, 0.75);
+  border-radius: 999px;
+  min-width: 16px;
+  min-height: 16px;
+  margin: 2px;
+}
+
+.widget-dnd > switch:checked slider {
+  background: rgba(235, 235, 245, 0.95);
+}
+
+/* ─── MPRIS / Spotify ────────────────────────────────────── */
+.widget-mpris {
+  margin: 0 0 8px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+}
+
+.widget-mpris-player {
+  padding: 0;
+  border-radius: 10px;
+}
+
+/* album art */
+.widget-mpris-album-art {
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+}
+
+/* track title */
+.widget-mpris-title {
+  font-weight: 600;
+  font-size: 12.5px;
+  color: rgba(225, 225, 235, 0.96);
+  letter-spacing: 0.02em;
+}
+
+/* artist */
+.widget-mpris-subtitle {
+  font-size: 10.5px;
+  color: rgba(140, 140, 155, 0.72);
+  letter-spacing: 0.015em;
+}
+
+/* prev / play / next buttons */
+.widget-mpris > box > button {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  color: rgba(165, 165, 178, 0.80);
+  padding: 4px 10px;
+  min-width: 32px;
+}
+
+.widget-mpris > box > button:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: rgba(215, 215, 228, 0.95);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* ─── Volume ─────────────────────────────────────────────── */
+.widget-volume {
+  margin: 0 0 6px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+}
+
+.widget-volume > box > label {
+  font-size: 15px;
+  color: rgba(160, 160, 175, 0.72);
+  min-width: 24px;
+}
+
+/* ─── Backlight ──────────────────────────────────────────── */
+.widget-backlight {
+  margin: 0 0 8px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+}
+
+.widget-backlight > box > label {
+  font-size: 15px;
+  color: rgba(160, 160, 175, 0.72);
+  min-width: 24px;
+}
+
+/* shared slider style */
+scale trough {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+  min-height: 4px;
+  margin: 0 4px;
+}
+
+scale highlight {
+  background: rgba(255, 255, 255, 0.48);
+  border-radius: 999px;
+}
+
+scale slider {
+  background: #ffffff;
+  border-radius: 50%;
+  min-width: 13px;
+  min-height: 13px;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.55);
+}
+
+scale slider:hover {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.22),
+    0 2px 8px rgba(0, 0, 0, 0.65);
+}
+
+/* ─── Buttons grid ───────────────────────────────────────── */
+.widget-buttons-grid {
+  margin: 0 0 10px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild {
+  padding: 3px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  color: rgba(148, 150, 168, 0.70);
+  font-size: 19px;
+  min-width: 88px;
+  min-height: 54px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(210, 212, 228, 0.92);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.active {
+  background: rgba(128, 64, 96, 0.34);
+  border: 1px solid rgba(194, 126, 162, 0.58);
+  border-left: 2px solid rgba(222, 170, 198, 0.85);
+  color: rgba(250, 236, 246, 0.98);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.10),
+    0 4px 14px rgba(0, 0, 0, 0.42);
+}
+
+/* ─── Notification toasts (popups) ──────────────────────── */
+.notification-popup {
+  background: rgba(6, 6, 8, 0.90);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.13);
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: rgba(220, 220, 228, 0.92);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.85),
+    0 24px 48px rgba(0, 0, 0, 0.70),
+    0 8px 20px rgba(0, 0, 0, 0.50);
+}
+
+/* ─── Notification cards (in panel) ─────────────────────── */
+.notification-row {
+  margin: 3px 0;
+  outline: none;
+}
+
+.notification {
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 11px;
+  padding: 10px 12px;
+  color: rgba(175, 175, 188, 0.82);
+}
+
+.notification:hover {
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+/* latest notification — highlighted left border like wofi selected */
+.notification.high {
+  border-left: 2px solid rgba(255, 255, 255, 0.50);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 2px 12px rgba(0, 0, 0, 0.35);
+}
+
+.notification.critical {
+  background: rgba(14, 8, 8, 0.90);
+  border-left: 2px solid rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+/* app name */
+.notification-default-action .notification-content .summary {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(222, 222, 232, 0.96);
+  letter-spacing: 0.02em;
+}
+
+.notification-default-action .notification-content .time {
+  font-size: 9.5px;
+  color: rgba(100, 100, 115, 0.60);
+}
+
+.notification-default-action .notification-content .body {
+  font-size: 11px;
+  color: rgba(148, 148, 162, 0.78);
+  line-height: 1.55;
+}
+
+/* app icon */
+.notification-default-action .notification-content image {
+  border-radius: 8px;
+  -gtk-icon-filter: brightness(0.9);
+}
+
+/* ─── Spotify specific card ──────────────────────────────── */
+/* Spotify sends app-name = "Spotify" with album art image */
+.notification[app-name="Spotify"],
+.notification[app-name="spotify"] {
+  background: rgba(8, 8, 12, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-left: 2px solid rgba(30, 215, 96, 0.55);
+}
+
+.notification[app-name="Spotify"] .summary,
+.notification[app-name="spotify"] .summary {
+  color: rgba(235, 235, 245, 0.98);
+}
+
+.notification[app-name="Spotify"] .body,
+.notification[app-name="spotify"] .body {
+  color: rgba(160, 160, 175, 0.82);
+}
+
+/* ─── Dismiss button ─────────────────────────────────────── */
+.close-button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: rgba(100, 100, 115, 0.50);
+  font-size: 12px;
+  min-width: 20px;
+  min-height: 20px;
+  padding: 0;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: rgba(205, 205, 218, 0.90);
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+scrollbar { background: transparent; border: none; }
+
+scrollbar trough {
+  background: transparent;
+  border-radius: 999px;
+  min-width: 2px;
+}
+
+scrollbar slider {
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+  min-width: 2px;
+  min-height: 24px;
+  margin: 2px;
+}
+
+scrollbar slider:hover  { background: rgba(255, 255, 255, 0.26); }
+scrollbar slider:active { background: rgba(255, 255, 255, 0.42); }

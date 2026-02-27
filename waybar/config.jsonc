@@ -11,16 +11,6 @@
     "modules-center": ["clock"],
     "modules-right": ["tray", "pulseaudio", "network", "custom/bluetooth", "custom/screenrec", "battery"],
 
-    "hyprland/workspaces": {
-        "format": "{icon}",
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "format-icons": {
-            "active": "",
-            "default": ""
-        }
-    },
-
     "clock": {
         "format": "  {:%a %d %b  %H:%M}",
         "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt>{calendar}</tt>",
@@ -78,5 +68,9 @@
 
     "tray": {
         "spacing": 6
-    }
+    },
+    "hyprland/workspaces": {
+    "format": "{id}",
+    "on-click": "activate"
+}
 }

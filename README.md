@@ -1,91 +1,126 @@
-# Hyprland Dotfiles (Arch Linux)
+# HyperLight Hyprland Dotfiles (Arch Linux)
 
-Personal desktop config for a transparent, dark, Arch-blue Hyprland setup.
-A minimal, performance-focused Hyprland configuration designed for speed, simplicity, and modern security.
-## Stack
-- WM: `Hyprland`
-- Bar: `Waybar`
-- Launcher: `Wofi`
+Personal Hyprland rice focused on dark glass styling, practical keybinds, lock/suspend flow, screenshots, recording, wallpaper tools, and Waybar modules.
+
+## 1. What this includes
+- WM: `hyprland`
+- Bar: `waybar`
+- Launcher: `wofi`
 - OSD: `swayosd`
+- Notification center: `swaync`
 - Terminal: `kitty`
-- File manager: `nautilus`
-- Lock screen: `hyprlock`
-- Display manager (boot login): `SDDM` (theme: `maya`)
+- File manager: `thunar`
+- Lock screen: `hyprlock` + `hypridle`
+- Wallpaper engine: `hyprpaper`
 
-## Main Features
-- Transparent UI across Hyprland windows and core components.
-- Themed Waybar, Wofi, swayosd, Kitty, Nautilus.
-- Custom lock flow with `SUPER + L`.
-- Screenshot workflow with copy-to-clipboard and notifications.
-- Random wallpaper changer keybind.
-- Battery low notifier daemon.
-- Bluetooth details module in Waybar with click actions.
-
-## Repository Layout
-- `hypr/hyprland.conf` - main Hyprland config and keybinds
-- `hypr/hyprlock.conf` - lockscreen UI
-- `hypr/scripts/` - helper scripts:
-  - `lock-screen.sh`
-  - `battery-alert.sh`
-  - `screenshot-copy.sh`
-  - `wallpaper-random.sh`
-  - `polkit-agent.sh`
-  - `fingerprint-fallback-setup.sh`
-  - `apply-hyprlock-pam.sh`
-  - `apply-sddm-main-screen.sh`
-- `waybar/config.jsonc`, `waybar/style.css`, `waybar/scripts/bluetooth-status.sh`
-- `wofi/style.css`
-- `swayosd/style.css`
-- `kitty/kitty.conf`
-- `gtk-3.0/gtk.css`, `gtk-4.0/gtk.css` (Nautilus/GTK styling)
-
-## Keybinds (Important)
-- `SUPER + SPACE` - app launcher (Wofi)
-- `SUPER + B` - toggle/restart Waybar
-- `SUPER + W` - random wallpaper
-- `SUPER + S` - full screenshot to clipboard
-- `SUPER + L` - lock screen
-
-## Fingerprint + Password Fallback
-This repo includes scripts to apply fingerprint-first auth with password fallback:
-- `hypr/scripts/fingerprint-fallback-setup.sh`
-- `hypr/scripts/apply-hyprlock-pam.sh`
-
-Run (with sudo) when needed:
+## 2. Install packages
 ```bash
-sudo ~/.config/hypr/scripts/fingerprint-fallback-setup.sh $USER
-sudo ~/.config/hypr/scripts/apply-hyprlock-pam.sh
+sudo pacman -S --needed \
+  hyprland hyprlock hypridle hyprpaper xdg-desktop-portal-hyprland \
+  waybar wofi kitty thunar tumbler ffmpegthumbnailer \
+  swayosd swaynotificationcenter dunst libnotify \
+  grim slurp wl-clipboard wf-recorder \
+  pipewire wireplumber pipewire-pulse pavucontrol \
+  brightnessctl playerctl acpi bluez bluez-utils blueman \
+  polkit-gnome networkmanager
 ```
 
-## SDDM Main Login Screen Theming
-Apply custom boot/login screen theme:
+Optional packages used by some scripts:
 ```bash
+sudo pacman -S --needed sddm fprintd qt6ct libcanberra
+```
+
+## 3. Copy configs to your laptop
+Clone this repo anywhere, then copy only the needed folders:
+```bash
+mkdir -p ~/.config
+cp -r hypr waybar wofi swayosd swaync dunst kitty Thunar gtk-4.0 systemd ~/.config/
+```
+
+Make sure scripts are executable:
+```bash
+chmod +x ~/.config/hypr/scripts/*.sh ~/.config/waybar/scripts/*.sh
+```
+
+## 4. Replace hardcoded username paths
+Some files use `/home/jegan/...`. Replace with your real `$HOME`:
+```bash
+for d in hypr waybar systemd kitty; do
+  find "$HOME/.config/$d" -type f -print0 2>/dev/null | xargs -0 -r sed -i "s|/home/jegan|$HOME|g"
+done
+```
+
+## 5. Enable required services
+```bash
+sudo systemctl enable --now NetworkManager.service
+sudo systemctl enable --now bluetooth.service
+systemctl --user daemon-reload
+systemctl --user enable --now hypr-battery-alert.service
+```
+
+If you want SDDM login manager:
+```bash
+sudo systemctl enable sddm.service
 sudo ~/.config/hypr/scripts/apply-sddm-main-screen.sh
 ```
 
-## Dependencies
-Install core packages (adjust as needed):
+## 6. Wallpaper folder
+Put wallpapers in one of these folders (first existing one is used):
+- `~/Pictures/Wallpapers`
+- `~/Pictures/wallpapers`
+- `~/Pictures`
+- `~/pictures/wallpapers`
+- `~/pictures/Wallpapers`
+- `~/pictures`
+
+## 7. Start Hyprland
+- From display manager: choose `Hyprland`.
+- From TTY:
 ```bash
-sudo pacman -S hyprland hyprlock hyprpaper waybar wofi kitty nautilus \
-  swayosd grim slurp wl-clipboard brightnessctl playerctl \
-  acpi libnotify bluez bluez-utils fprintd sddm
+exec Hyprland
 ```
 
-## Apply / Reload
-- Reload Hyprland:
+## 8. Important keybinds
+- `SUPER + RETURN`: open Kitty
+- `SUPER + E`: open Thunar
+- `SUPER + SPACE`: app launcher
+- `SUPER + W`: random wallpaper
+- `SUPER + SHIFT + W`: wallpaper picker (preview list)
+- `SUPER + L`: lock and auto-suspend after 30s if still locked
+- `SUPER + SHIFT + R`: start/stop screen recording
+- `SUPER + S`: screenshot to clipboard
+- `SUPER + SHIFT + B`: open Bluetooth manager
+- `SUPER + B`: toggle Waybar
+
+## 9. Optional security setup
+Fingerprint + password fallback for `hyprlock`:
+```bash
+sudo ~/.config/hypr/scripts/fingerprint-fallback-setup.sh "$USER"
+sudo ~/.config/hypr/scripts/apply-hyprlock-pam.sh
+```
+
+Laptop lid suspend policy:
+```bash
+sudo ~/.config/hypr/scripts/apply-logind-lid-policy.sh
+```
+
+## 10. Reload after edits
 ```bash
 hyprctl reload
-```
-- Restart Waybar:
-```bash
 pkill waybar && waybar &
-```
-- Restart Nautilus:
-```bash
-nautilus -q
+pkill swaync && swaync &
 ```
 
+## 11. Main directories
+- `hypr/` - Hyprland, hyprlock, hypridle, scripts
+- `waybar/` - bar modules and styles
+- `wofi/` - launcher and wallpaper picker styles
+- `swayosd/` - volume/brightness OSD style
+- `swaync/` - notifications + control center
+- `kitty/` - terminal config + long-command notifications
+- `Thunar/`, `gtk-4.0/` - file manager behavior + GTK tweaks
+
 ## Notes
-- Some scripts modify system files under `/etc` and must be run with `sudo`.
-- Test changes in a terminal before rebooting.
-- Keep backups of PAM and display manager configs.
+- Scripts that change `/etc` require `sudo`.
+- Keep backups before changing PAM or display manager config.
+- If something does not apply, restart your session once after install.

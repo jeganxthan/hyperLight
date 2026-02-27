@@ -8,7 +8,8 @@ for cmd in grim wl-copy; do
   fi
 done
 
-dir="$HOME/pictures/screenshots"
+# Save screenshots in the standard XDG Pictures folder.
+dir="$HOME/Pictures/Screenshots"
 mkdir -p "$dir"
 
 file="$dir/screenshot-$(date +%Y%m%d-%H%M%S).png"
