@@ -9,5 +9,5 @@ core.clock_delta=1
 storage.last-location="/home/jegan/.cache/spotify/Storage"
 app.window.state=2
 app.window.position.saved=true
-app.window.position.height=756
+app.window.position.height=704
 app.last-launched-version="1.2.82.428.g0ac8be2b"
