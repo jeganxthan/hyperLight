@@ -1,0 +1,12 @@
+[Unit]
+Description=Auto-clear cliphist every 20 hours
+
+[Timer]
+OnBootSec=20h
+OnUnitActiveSec=20h
+Persistent=true
+Unit=cliphist-auto-clear.service
+
+[Install]
+WantedBy=timers.target
+

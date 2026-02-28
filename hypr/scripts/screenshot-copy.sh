@@ -19,7 +19,18 @@ if ! grim "$file"; then
   exit 1
 fi
 
-wl-copy --type image/png < "$file"
+if ! wl-copy --type image/png < "$file"; then
+  command -v notify-send >/dev/null 2>&1 && notify-send "Screenshot failed" "Could not copy image to clipboard"
+  exit 1
+fi
+
+# Also copy to PRIMARY selection for middle-click paste workflows.
+wl-copy --primary --type image/png < "$file" >/dev/null 2>&1 || true
+
+# If cliphist is available, store immediately.
+if command -v cliphist >/dev/null 2>&1 && command -v wl-paste >/dev/null 2>&1; then
+  wl-paste --type image/png 2>/dev/null | cliphist store >/dev/null 2>&1 || true
+fi
 
 if command -v canberra-gtk-play >/dev/null 2>&1; then
   canberra-gtk-play -i camera-shutter -d "screenshot" >/dev/null 2>&1 || true
