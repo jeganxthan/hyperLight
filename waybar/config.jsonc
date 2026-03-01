@@ -9,7 +9,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "pulseaudio", "network", "custom/bluetooth", "custom/screenrec", "battery"],
+    "modules-right": ["tray", "pulseaudio", "custom/wifi", "custom/bluetooth", "custom/screenrec", "battery"],
 
     "clock": {
         "format": "  {:%a %d %b  %H:%M}",
@@ -36,7 +36,17 @@
         "format-wifi": "  {signalStrength}%",
         "format-ethernet": "󰈀  connected",
         "format-disconnected": "󰖪  offline",
-        "tooltip-format": "{ifname} via {gwaddr}"
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "on-click": "/home/jegan/.config/hypr/scripts/wifi-manager.sh",
+        "on-click-right": "bash -c 'STATE=$(nmcli -t -f WIFI g); if echo \"$STATE\" | grep -q enabled; then nmcli radio wifi off; else nmcli radio wifi on; fi'"
+    },
+
+    "custom/wifi": {
+        "return-type": "json",
+        "exec": "/home/jegan/.config/waybar/scripts/wifi-status.sh",
+        "interval": 5,
+        "on-click": "/home/jegan/.config/hypr/scripts/wifi-manager.sh",
+        "on-click-right": "bash -c 'STATE=$(nmcli -t -f WIFI g); if echo \"$STATE\" | grep -q enabled; then nmcli radio wifi off; else nmcli radio wifi on; fi'"
     },
 
     "custom/bluetooth": {

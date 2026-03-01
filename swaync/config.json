@@ -5,63 +5,88 @@
   "control-center-layer": "overlay",
   "layer-shell": true,
   "cssPriority": "user",
-  "control-center-margin-top": 8,
+  "control-center-margin-top": 10,
   "control-center-margin-bottom": 0,
-  "control-center-margin-right": 8,
+  "control-center-margin-right": 10,
   "control-center-margin-left": 0,
-  "notification-icon-size": 44,
+  "notification-icon-size": 40,
   "notification-body-image-height": 80,
   "notification-body-image-width": 160,
-  "timeout": 5,
-  "timeout-low": 3,
+  "timeout": 8,
+  "timeout-low": 4,
   "timeout-critical": 0,
   "fit-to-screen": false,
-  "control-center-width": 320,
-  "control-center-height": 680,
-  "notification-window-width": 340,
+  "control-center-width": 330,
+  "control-center-height": 740,
+  "notification-window-width": 360,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
-  "transition-time": 200,
+  "transition-time": 180,
   "hide-on-clear": false,
   "hide-on-action": true,
-  "script-fail-notify": true,
+  "script-fail-notify": false,
+
+  "scripts": {
+    "whatsapp-reply": {
+      "app-name": "WhatsApp",
+      "run-script": "~/.config/phonebridge/phonebridge-reply.sh whatsapp \"$SUMMARY\" 0",
+      "label": "󰍩 Reply",
+      "type": "script"
+    },
+    "sms-reply": {
+      "app-name": "SMS",
+      "run-script": "~/.config/phonebridge/phonebridge-reply.sh sms \"$SUMMARY\" 0",
+      "label": "󰍩 Reply",
+      "type": "script"
+    },
+    "telegram-reply": {
+      "app-name": "Telegram",
+      "run-script": "~/.config/phonebridge/phonebridge-reply.sh telegram \"$SUMMARY\" 0",
+      "label": "󰍩 Reply",
+      "type": "script"
+    },
+    "signal-reply": {
+      "app-name": "Signal",
+      "run-script": "~/.config/phonebridge/phonebridge-reply.sh signal \"$SUMMARY\" 0",
+      "label": "󰍩 Reply",
+      "type": "script"
+    }
+  },
+
   "widgets": [
     "title",
     "dnd",
-    "mpris",
     "volume",
-    "backlight",
     "buttons-grid",
+    "menubar",
     "notifications"
   ],
+
   "widget-config": {
+
     "title": {
       "text": "Control Center",
       "clear-all-button": true,
       "button-text": "󰃢  Clear"
     },
+
     "dnd": {
       "text": "Do Not Disturb"
     },
-    "mpris": {
-      "image-size": 52,
-      "image-radius": 7
-    },
+
     "volume": {
       "label": "󰕾",
       "show-per-app": false
     },
-    "backlight": {
-      "label": "󰃝"
-    },
+
     "buttons-grid": {
       "actions": [
         {
           "label": "󰖩",
-          "command": "bash -c 'STATE=$(nmcli -t -f WIFI g); if echo \"$STATE\" | grep -q \"enabled\"; then nmcli radio wifi off; else nmcli radio wifi on; fi'",
+          "command": "/home/jegan/.config/hypr/scripts/wifi-manager.sh",
           "update-command": "bash -c 'nmcli -t -f WIFI g | grep -q enabled && echo active || echo inactive'",
           "active": false,
-          "tooltip": "Wi-Fi"
+          "tooltip": "Wi-Fi Settings"
         },
         {
           "label": "󰂱",
@@ -78,6 +103,16 @@
           "tooltip": "Airplane"
         },
         {
+          "label": "󰀠",
+          "command": "bash -c 'printf alarm > /tmp/phonebridge_command'",
+          "tooltip": "Phone Alarm"
+        },
+        {
+          "label": "󰦕",
+          "command": "bash -c 'wl-paste | wl-copy && notify-send -a PhoneBridge \"Clipboard\" \"Sent to phone\" -t 2000'",
+          "tooltip": "Clipboard → Phone"
+        },
+        {
           "label": "󰌾",
           "command": "hyprlock",
           "tooltip": "Lock"
@@ -89,6 +124,29 @@
         }
       ]
     },
+
+    "menubar": {
+      "menu": {
+        "Phone": {
+          "label": "󰤿  Phone",
+          "actions": [
+            {
+              "label": "󰅍  Send Clipboard → Phone",
+              "command": "bash -c 'wl-paste > /tmp/phonebridge_clip_out && notify-send -a PhoneBridge \"Clipboard\" \"Sent to phone\"'"
+            },
+            {
+              "label": "󰀠  Ring Phone",
+              "command": "bash -c 'printf alarm > /tmp/phonebridge_command'"
+            },
+            {
+              "label": "󰀙  Stop Ring",
+              "command": "bash -c 'printf alarm_stop > /tmp/phonebridge_command'"
+            }
+          ]
+        }
+      }
+    },
+
     "notifications": {}
   }
 }

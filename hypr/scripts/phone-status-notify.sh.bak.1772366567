@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+last=""
+
+while true; do
+  battery="$(cat /tmp/phonebridge_battery 2>/dev/null)"
+  status="$(cat /tmp/phonebridge_status 2>/dev/null)"
+
+  if [[ -n "$battery" && -n "$status" && "$status" != "󰤿 --" ]]; then
+    device="${status#󰤿 }"
+    msg="$device|$battery"
+
+    # only update notification when content changed
+    if [[ "$msg" != "$last" ]]; then
+      /usr/bin/notify-send \
+        --app-name "PhoneBridge" \
+        --urgency low \
+        --expire-time 0 \
+        --hint string:x-canonical-private-synchronous:phone-status \
+        "󰤿  $device" \
+        "$battery"
+      last="$msg"
+    fi
+  fi
+
+  sleep 10
+done

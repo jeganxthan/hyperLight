@@ -1,30 +1,566 @@
+/* ╔═══════════════════════════════════════════════════════════╗
+   ║  SwayNC — Void Frost · PhoneBridge Edition               ║
+   ║  Frosted glass popups · Inline reply buttons             ║
+   ╚═══════════════════════════════════════════════════════════╝
+
+   Palette:
+   void-deep   #04040A        base bg
+   void-mid    #0A0A14        surface
+   indigo      110,122,228    primary accent
+   teal        80,195,175     SMS
+   amber       230,180,60     call
+   violet      155,95,228     WhatsApp / messaging
+   red         235,75,65      critical
+*/
+
+/* ── Global reset ────────────────────────────────────────── */
 * {
-    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-family: "JetBrainsMono Nerd Font", "Iosevka Nerd Font", monospace;
     font-size: 12px;
-    outline: none;
-    border: none;
+    transition:
+        background 140ms ease,
+        color       110ms ease,
+        border-color 110ms ease,
+        opacity      160ms ease;
 }
 
-.control-center {
-    background: rgba(6, 6, 9, 0.88);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-top: 1.5px solid rgba(255, 255, 255, 0.12);
-    border-radius: 16px;
-    padding: 12px 10px 10px;
-    color: rgba(218, 218, 228, 0.92);
-}
-
-.notification-popup {
-    background: rgba(7, 7, 10, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: 1.5px solid rgba(255, 255, 255, 0.14);
-    border-radius: 13px;
-    padding: 11px 13px;
-    margin: 5px;
-    color: rgba(218, 218, 230, 0.92);
-}
-
-/* Remove the default full-screen dim backdrop behind control center */
 .blank-window {
     background: transparent;
+}
+
+/* ── Scrollbars — gone ───────────────────────────────────── */
+scrollbar,
+scrollbar trough,
+scrollbar slider,
+scrollbar slider:hover,
+scrollbar slider:active {
+    background:  transparent;
+    min-width:   0;
+    min-height:  0;
+    opacity:     0;
+    border:      none;
+}
+
+/* ╔═══════════════════════════════════════════════════════════╗
+   ║  CONTROL CENTER PANEL                                    ║
+   ╚═══════════════════════════════════════════════════════════╝ */
+
+.control-center {
+    background: rgba(4, 4, 10, 0.94);
+    border:     1px solid rgba(255, 255, 255, 0.07);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 14px 12px 12px;
+    color: rgba(200, 202, 220, 0.82);
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,0.65),
+        0 28px 70px rgba(0,0,0,0.82),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.control-center-list { background: transparent; }
+
+/* ── Title ───────────────────────────────────────────────── */
+.widget-title {
+    margin-bottom: 8px;
+    padding: 2px 4px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.widget-title > label {
+    font-size:      9px;
+    font-weight:    700;
+    color:          rgba(85, 88, 118, 0.55);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.widget-title > button {
+    background:  transparent;
+    border:      1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    color:       rgba(100, 102, 130, 0.58);
+    font-size:   10px;
+    padding:     3px 10px;
+    letter-spacing: 0.02em;
+}
+
+.widget-title > button:hover {
+    background:   rgba(255, 255, 255, 0.055);
+    border-color: rgba(255, 255, 255, 0.10);
+    color:        rgba(185, 187, 210, 0.90);
+}
+
+/* ── DND ─────────────────────────────────────────────────── */
+.widget-dnd {
+    margin:     2px 0 8px;
+    padding:    8px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border:     1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    min-height: 34px;
+}
+
+.widget-dnd > label {
+    font-size: 11px;
+    color:     rgba(145, 147, 172, 0.75);
+}
+
+.widget-dnd > switch {
+    background:    rgba(255, 255, 255, 0.06);
+    border:        1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    min-width:     38px;
+    min-height:    20px;
+}
+
+.widget-dnd > switch:checked {
+    background:   rgba(110, 122, 228, 0.55);
+    border-color: rgba(110, 122, 228, 0.70);
+}
+
+.widget-dnd > switch slider {
+    background:    rgba(180, 182, 205, 0.88);
+    border-radius: 999px;
+    min-width:     15px;
+    min-height:    15px;
+    margin:        2px;
+    box-shadow:    0 1px 4px rgba(0,0,0,0.45);
+}
+
+.widget-dnd > switch:checked slider {
+    background: rgba(240, 242, 255, 0.97);
+}
+
+/* ── Volume / Backlight ──────────────────────────────────── */
+.widget-volume,
+.widget-backlight {
+    margin:     0 0 6px;
+    padding:    9px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border:     1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    min-height: 12px;
+}
+
+.widget-volume > box > label,
+.widget-backlight > box > label {
+    font-size: 14px;
+    color:     rgba(130, 133, 162, 0.60);
+    min-width: 24px;
+}
+
+scale trough {
+    background:    rgba(255, 255, 255, 0.065);
+    border-radius: 999px;
+    min-height:    3px;
+    margin:        0 6px;
+}
+
+scale highlight {
+    background:    rgba(110, 122, 228, 0.58);
+    border-radius: 999px;
+}
+
+scale slider {
+    background:    rgba(220, 222, 242, 0.94);
+    border-radius: 50%;
+    min-width:     13px;
+    min-height:    13px;
+    border:        none;
+    box-shadow:    0 0 0 1px rgba(0,0,0,0.30), 0 2px 6px rgba(0,0,0,0.35);
+}
+
+scale slider:hover {
+    background: rgba(245, 246, 255, 1.0);
+}
+
+/* ── Buttons Grid ────────────────────────────────────────── */
+.widget-buttons-grid { margin: 0 0 8px; }
+
+.widget-buttons-grid > flowbox > flowboxchild {
+    padding: 3px;
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button {
+    background:    rgba(255, 255, 255, 0.025);
+    border:        1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 10px;
+    color:         rgba(90, 93, 122, 0.60);
+    font-size:     18px;
+    min-width:     86px;
+    min-height:    48px;
+    padding:       0;
+    font-family:   "JetBrainsMono Nerd Font", monospace;
+    box-shadow:    inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button:hover {
+    background:   rgba(255, 255, 255, 0.055);
+    border-color: rgba(255, 255, 255, 0.10);
+    color:        rgba(175, 177, 205, 0.90);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.07),
+        0 2px 8px rgba(0,0,0,0.28);
+}
+
+.widget-buttons-grid > flowbox > flowboxchild > button.active,
+.widget-buttons-grid > flowbox > flowboxchild > button:checked {
+    background:   rgba(110, 122, 228, 0.12);
+    border:       1px solid rgba(110, 122, 228, 0.32);
+    color:        rgba(165, 175, 245, 0.98);
+    box-shadow:
+        inset 0 1px 0 rgba(110,122,228,0.12),
+        0 0 14px rgba(110,122,228,0.09);
+}
+
+/* ── Notification cards (inside panel) ───────────────────── */
+.notification-row { margin: 3px 0; }
+
+.notification {
+    background:    rgba(255, 255, 255, 0.025);
+    border:        1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 10px;
+    padding:       10px 12px;
+    color:         rgba(160, 163, 182, 0.80);
+    box-shadow:    0 2px 10px rgba(0,0,0,0.18);
+}
+
+.notification:hover {
+    background:   rgba(255, 255, 255, 0.042);
+    border-color: rgba(255, 255, 255, 0.09);
+}
+
+.notification.high {
+    border-left: 2px solid rgba(200, 202, 228, 0.50);
+    background:  rgba(255, 255, 255, 0.036);
+}
+
+.notification.critical {
+    border-left: 2px solid rgba(235, 75, 65, 0.65);
+    background:  rgba(235, 75, 65, 0.05);
+}
+
+/* Content text */
+.notification-default-action .notification-content .summary {
+    font-size:      12px;
+    font-weight:    600;
+    color:          rgba(215, 218, 238, 0.95);
+    letter-spacing: 0.01em;
+}
+
+.notification-default-action .notification-content .time {
+    font-size:      9px;
+    color:          rgba(75, 77, 105, 0.52);
+    letter-spacing: 0.02em;
+}
+
+.notification-default-action .notification-content .body {
+    font-size:  11px;
+    color:      rgba(130, 133, 158, 0.74);
+    margin-top: 1px;
+}
+
+.notification-default-action .notification-content image {
+    border-radius: 6px;
+}
+
+/* Close button */
+.close-button {
+    background:    transparent;
+    border:        1px solid transparent;
+    border-radius: 5px;
+    color:         rgba(78, 80, 110, 0.42);
+    font-size:     10px;
+    min-width:     18px;
+    min-height:    18px;
+    padding:       0;
+}
+
+.close-button:hover {
+    background:   rgba(255, 255, 255, 0.055);
+    border-color: rgba(255, 255, 255, 0.08);
+    color:        rgba(195, 197, 218, 0.85);
+}
+
+/* ╔═══════════════════════════════════════════════════════════╗
+   ║  POPUP TOAST — Frosted Glass                             ║
+   ║                                                          ║
+   ║  SwayNC renders popups in a separate layer window.       ║
+   ║  We use a very low background alpha + border shimmer     ║
+   ║  to achieve the frosted glass look. True backdrop-filter ║
+   ║  blur requires compositor (Hyprland) to blur the layer.  ║
+   ║                                                          ║
+   ║  Add this to hyprland.conf for real blur:                ║
+   ║    layerrule = blur, swaync-notification-window          ║
+   ║    layerrule = ignorezero, swaync-notification-window    ║
+   ║    layerrule = ignorealpha 0.5, swaync-notification-window║
+   ╚═══════════════════════════════════════════════════════════╝ */
+
+.notification-popup {
+    /* Low alpha — Hyprland blur fills in the rest visually */
+    background:    rgba(8, 8, 16, 0.92);
+
+    border:        1px solid rgba(255, 255, 255, 0.13);
+    border-top:    1px solid rgba(255, 255, 255, 0.22);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+    border-radius: 14px;
+    padding:       13px 15px 11px;
+    margin:        6px;
+    color:         rgba(230, 232, 248, 0.97);
+
+    box-shadow:
+        /* outer glow rim */
+        0 0 0 1px rgba(0, 0, 0, 0.50),
+        /* depth shadow */
+        0 12px 40px rgba(0, 0, 0, 0.55),
+        0 4px  12px rgba(0, 0, 0, 0.35),
+        /* inner top shimmer */
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+/* App icon area */
+.notification-popup image {
+    border-radius: 8px;
+    margin-right:  4px;
+}
+
+/* Summary */
+.notification-popup .summary {
+    font-size:      13px;
+    font-weight:    600;
+    color:          rgba(228, 230, 250, 0.97);
+    letter-spacing: 0.01em;
+}
+
+/* Time stamp */
+.notification-popup .time {
+    font-size: 9px;
+    color:     rgba(80, 82, 115, 0.55);
+}
+
+/* Body text */
+.notification-popup .body {
+    font-size:  11.5px;
+    color:      rgba(148, 152, 178, 0.82);
+    margin-top: 2px;
+    line-height: 1.4;
+}
+
+/* Critical popup */
+.notification-popup.critical {
+    background:  rgba(12, 5, 5, 0.94);
+    border-left: 2px solid rgba(235, 75, 65, 0.70);
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,0.55),
+        0 12px 40px rgba(0,0,0,0.58),
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 0 18px rgba(235,75,65,0.08);
+}
+
+/* ── Notification action buttons (Reply, Dismiss, etc.) ───── */
+.notification-action {
+    background:    rgba(255, 255, 255, 0.055);
+    border:        1px solid rgba(255, 255, 255, 0.10);
+    border-radius: 7px;
+    color:         rgba(185, 188, 215, 0.88);
+    font-size:     11px;
+    padding:       5px 14px;
+    margin:        6px 4px 0;
+    font-family:   "JetBrainsMono Nerd Font", monospace;
+}
+
+.notification-action:hover {
+    background:   rgba(110, 122, 228, 0.16);
+    border-color: rgba(110, 122, 228, 0.38);
+    color:        rgba(175, 185, 255, 0.97);
+    box-shadow:   0 0 10px rgba(110,122,228,0.10);
+}
+
+.notification-action:active {
+    background:   rgba(110, 122, 228, 0.25);
+    border-color: rgba(110, 122, 228, 0.50);
+}
+
+/* Script button (Reply button specifically) */
+.notification-action.scriptButton,
+.notification-action[label*="Reply"] {
+    background:   rgba(110, 122, 228, 0.10);
+    border-color: rgba(110, 122, 228, 0.28);
+    color:        rgba(155, 168, 245, 0.92);
+}
+
+.notification-action.scriptButton:hover,
+.notification-action[label*="Reply"]:hover {
+    background:   rgba(110, 122, 228, 0.22);
+    border-color: rgba(110, 122, 228, 0.48);
+    color:        rgba(190, 200, 255, 0.98);
+    box-shadow:   0 0 12px rgba(110,122,228,0.14);
+}
+
+/* ╔═══════════════════════════════════════════════════════════╗
+   ║  PhoneBridge — App-specific styles                       ║
+   ╚═══════════════════════════════════════════════════════════╝ */
+
+/* ── PhoneBridge status (persistent, no popup) ───────────── */
+.notification[app-name="PhoneBridge"],
+.notification[app-name="phonebridge"] {
+    background:    rgba(110, 122, 228, 0.04);
+    border:        1px solid rgba(110, 122, 228, 0.13);
+    border-left:   2px solid rgba(110, 122, 228, 0.52);
+    border-radius: 9px;
+    padding:       7px 12px;
+    margin:        0 0 5px;
+}
+
+.notification[app-name="PhoneBridge"] .summary,
+.notification[app-name="phonebridge"] .summary {
+    font-size:      11px;
+    font-weight:    600;
+    color:          rgba(138, 150, 235, 0.90);
+    letter-spacing: 0.03em;
+}
+
+.notification[app-name="PhoneBridge"] .body,
+.notification[app-name="phonebridge"] .body {
+    font-size: 10px;
+    color:     rgba(90, 96, 155, 0.66);
+}
+
+.notification[app-name="PhoneBridge"] .close-button,
+.notification[app-name="phonebridge"] .close-button {
+    opacity:    0;
+    min-width:  0;
+    min-height: 0;
+}
+
+/* Suppress popup toast for status notifications */
+.notification-popup[app-name="PhoneBridge"],
+.notification-popup[app-name="phonebridge"] {
+    opacity:    0;
+    min-height: 0;
+    min-width:  0;
+    padding:    0;
+    margin:     0;
+    border:     none;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* ── SMS — teal ──────────────────────────────────────────── */
+.notification[app-name="SMS"] {
+    border-left:  2px solid rgba(80, 195, 175, 0.58);
+    border-color: rgba(80, 195, 175, 0.12);
+    background:   rgba(80, 195, 175, 0.03);
+}
+
+.notification[app-name="SMS"] .summary { color: rgba(120, 215, 195, 0.92); }
+.notification[app-name="SMS"] .body    { color: rgba(85, 158, 142, 0.70); }
+
+.notification-popup[app-name="SMS"] {
+    border-left: 2px solid rgba(80, 195, 175, 0.65);
+    background:  rgba(4, 14, 12, 0.92);
+}
+
+.notification-popup[app-name="SMS"] .summary { color: rgba(140, 225, 205, 0.96); }
+
+/* ── Incoming Call — amber ───────────────────────────────── */
+.notification.critical[app-name="PhoneBridge"] {
+    border-left:  2px solid rgba(230, 180, 60, 0.75);
+    border-color: rgba(230, 180, 60, 0.18);
+    background:   rgba(230, 180, 60, 0.05);
+}
+
+.notification.critical[app-name="PhoneBridge"] .summary {
+    color: rgba(240, 200, 100, 0.95);
+}
+
+.notification-popup.critical[app-name="PhoneBridge"] {
+    border-left: 2px solid rgba(230, 180, 60, 0.80);
+    background:  rgba(10, 8, 2, 0.94);
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,0.55),
+        0 12px 40px rgba(0,0,0,0.58),
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 0 20px rgba(230,180,60,0.07);
+}
+
+.notification-popup.critical[app-name="PhoneBridge"] .summary {
+    color: rgba(245, 205, 110, 0.97);
+}
+
+/* ── WhatsApp ────────────────────────────────────────────── */
+.notification[app-name="WhatsApp"] {
+    border-left:  2px solid rgba(37, 211, 102, 0.50);
+    border-color: rgba(37, 211, 102, 0.10);
+    background:   rgba(37, 211, 102, 0.03);
+}
+
+.notification[app-name="WhatsApp"] .summary { color: rgba(100, 225, 150, 0.90); }
+
+.notification-popup[app-name="WhatsApp"] {
+    border-left: 2px solid rgba(37, 211, 102, 0.60);
+    background:  rgba(3, 14, 8, 0.92);
+}
+
+.notification-popup[app-name="WhatsApp"] .summary {
+    color: rgba(110, 232, 158, 0.97);
+}
+
+/* ── Telegram ────────────────────────────────────────────── */
+.notification[app-name="Telegram"],
+.notification-popup[app-name="Telegram"] {
+    border-left: 2px solid rgba(36, 161, 222, 0.55);
+}
+
+.notification[app-name="Telegram"] {
+    background:   rgba(36, 161, 222, 0.03);
+    border-color: rgba(36, 161, 222, 0.10);
+}
+
+.notification[app-name="Telegram"] .summary { color: rgba(100, 185, 240, 0.90); }
+
+.notification-popup[app-name="Telegram"] {
+    background: rgba(2, 10, 16, 0.92);
+}
+
+.notification-popup[app-name="Telegram"] .summary {
+    color: rgba(112, 195, 248, 0.97);
+}
+
+/* ── Signal ──────────────────────────────────────────────── */
+.notification[app-name="Signal"],
+.notification-popup[app-name="Signal"] {
+    border-left: 2px solid rgba(155, 95, 228, 0.50);
+}
+
+.notification[app-name="Signal"] {
+    background:   rgba(155, 95, 228, 0.03);
+    border-color: rgba(155, 95, 228, 0.10);
+}
+
+.notification[app-name="Signal"] .summary   { color: rgba(185, 148, 245, 0.90); }
+
+.notification-popup[app-name="Signal"] {
+    background: rgba(8, 4, 16, 0.92);
+}
+
+.notification-popup[app-name="Signal"] .summary {
+    color: rgba(195, 158, 252, 0.97);
+}
+
+/* ── Category fallback ───────────────────────────────────── */
+.notification[category="phonebridge-status"] {
+    border-left: 2px solid rgba(110, 122, 228, 0.52);
+    background:  rgba(110, 122, 228, 0.04);
+}
+
+.notification-popup[category="phonebridge-status"] {
+    opacity:    0;
+    min-height: 0;
+    padding:    0;
+    margin:     0;
+    border:     0;
+    background: transparent;
+    box-shadow: none;
 }

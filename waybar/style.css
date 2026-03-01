@@ -97,6 +97,7 @@ window#waybar {
 /* ── All right-side modules ──────────────────────────────── */
 #battery,
 #network,
+#custom-wifi,
 #pulseaudio,
 #bluetooth,
 #custom-bluetooth,
