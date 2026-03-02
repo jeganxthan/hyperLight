@@ -1,6 +1,6 @@
 /* ╔═══════════════════════════════════════════════════════════╗
    ║  SwayNC — Void Frost · PhoneBridge Edition               ║
-   ║  Frosted glass popups · Inline reply buttons             ║
+   ║  + Spotify notification styles                           ║
    ╚═══════════════════════════════════════════════════════════╝
 
    Palette:
@@ -11,9 +11,9 @@
    amber       230,180,60     call
    violet      155,95,228     WhatsApp / messaging
    red         235,75,65      critical
+   spotify     30,215,96      Spotify green
 */
 
-/* ── Global reset ────────────────────────────────────────── */
 * {
     font-family: "JetBrainsMono Nerd Font", "Iosevka Nerd Font", monospace;
     font-size: 12px;
@@ -24,9 +24,7 @@
         opacity      160ms ease;
 }
 
-.blank-window {
-    background: transparent;
-}
+.blank-window { background: transparent; }
 
 /* ── Scrollbars — gone ───────────────────────────────────── */
 scrollbar,
@@ -41,10 +39,7 @@ scrollbar slider:active {
     border:      none;
 }
 
-/* ╔═══════════════════════════════════════════════════════════╗
-   ║  CONTROL CENTER PANEL                                    ║
-   ╚═══════════════════════════════════════════════════════════╝ */
-
+/* ── Control Center ──────────────────────────────────────── */
 .control-center {
     background: rgba(4, 4, 10, 0.94);
     border:     1px solid rgba(255, 255, 255, 0.07);
@@ -72,17 +67,15 @@ scrollbar slider:active {
     font-weight:    700;
     color:          rgba(85, 88, 118, 0.55);
     letter-spacing: 0.14em;
-    text-transform: uppercase;
 }
 
 .widget-title > button {
-    background:  transparent;
-    border:      1px solid rgba(255, 255, 255, 0.06);
+    background:    transparent;
+    border:        1px solid rgba(255, 255, 255, 0.06);
     border-radius: 6px;
-    color:       rgba(100, 102, 130, 0.58);
-    font-size:   10px;
-    padding:     3px 10px;
-    letter-spacing: 0.02em;
+    color:         rgba(100, 102, 130, 0.58);
+    font-size:     10px;
+    padding:       3px 10px;
 }
 
 .widget-title > button:hover {
@@ -93,12 +86,12 @@ scrollbar slider:active {
 
 /* ── DND ─────────────────────────────────────────────────── */
 .widget-dnd {
-    margin:     2px 0 8px;
-    padding:    8px 12px;
-    background: rgba(255, 255, 255, 0.02);
-    border:     1px solid rgba(255, 255, 255, 0.05);
+    margin:        2px 0 8px;
+    padding:       8px 12px;
+    background:    rgba(255, 255, 255, 0.02);
+    border:        1px solid rgba(255, 255, 255, 0.05);
     border-radius: 10px;
-    min-height: 34px;
+    min-height:    34px;
 }
 
 .widget-dnd > label {
@@ -125,7 +118,6 @@ scrollbar slider:active {
     min-width:     15px;
     min-height:    15px;
     margin:        2px;
-    box-shadow:    0 1px 4px rgba(0,0,0,0.45);
 }
 
 .widget-dnd > switch:checked slider {
@@ -135,12 +127,12 @@ scrollbar slider:active {
 /* ── Volume / Backlight ──────────────────────────────────── */
 .widget-volume,
 .widget-backlight {
-    margin:     0 0 6px;
-    padding:    9px 14px;
-    background: rgba(255, 255, 255, 0.02);
-    border:     1px solid rgba(255, 255, 255, 0.05);
+    margin:        0 0 6px;
+    padding:       9px 14px;
+    background:    rgba(255, 255, 255, 0.02);
+    border:        1px solid rgba(255, 255, 255, 0.05);
     border-radius: 10px;
-    min-height: 12px;
+    min-height:    12px;
 }
 
 .widget-volume > box > label,
@@ -168,19 +160,14 @@ scale slider {
     min-width:     13px;
     min-height:    13px;
     border:        none;
-    box-shadow:    0 0 0 1px rgba(0,0,0,0.30), 0 2px 6px rgba(0,0,0,0.35);
 }
 
-scale slider:hover {
-    background: rgba(245, 246, 255, 1.0);
-}
+scale slider:hover { background: rgba(245, 246, 255, 1.0); }
 
 /* ── Buttons Grid ────────────────────────────────────────── */
 .widget-buttons-grid { margin: 0 0 8px; }
 
-.widget-buttons-grid > flowbox > flowboxchild {
-    padding: 3px;
-}
+.widget-buttons-grid > flowbox > flowboxchild { padding: 3px; }
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
     background:    rgba(255, 255, 255, 0.025);
@@ -192,16 +179,12 @@ scale slider:hover {
     min-height:    48px;
     padding:       0;
     font-family:   "JetBrainsMono Nerd Font", monospace;
-    box-shadow:    inset 0 1px 0 rgba(255,255,255,0.03);
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
     background:   rgba(255, 255, 255, 0.055);
     border-color: rgba(255, 255, 255, 0.10);
     color:        rgba(175, 177, 205, 0.90);
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.07),
-        0 2px 8px rgba(0,0,0,0.28);
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button.active,
@@ -209,12 +192,9 @@ scale slider:hover {
     background:   rgba(110, 122, 228, 0.12);
     border:       1px solid rgba(110, 122, 228, 0.32);
     color:        rgba(165, 175, 245, 0.98);
-    box-shadow:
-        inset 0 1px 0 rgba(110,122,228,0.12),
-        0 0 14px rgba(110,122,228,0.09);
 }
 
-/* ── Notification cards (inside panel) ───────────────────── */
+/* ── Notification cards (panel) ──────────────────────────── */
 .notification-row { margin: 3px 0; }
 
 .notification {
@@ -223,7 +203,6 @@ scale slider:hover {
     border-radius: 10px;
     padding:       10px 12px;
     color:         rgba(160, 163, 182, 0.80);
-    box-shadow:    0 2px 10px rgba(0,0,0,0.18);
 }
 
 .notification:hover {
@@ -241,31 +220,26 @@ scale slider:hover {
     background:  rgba(235, 75, 65, 0.05);
 }
 
-/* Content text */
 .notification-default-action .notification-content .summary {
-    font-size:      12px;
-    font-weight:    600;
-    color:          rgba(215, 218, 238, 0.95);
-    letter-spacing: 0.01em;
+    font-size:   12px;
+    font-weight: 600;
+    color:       rgba(215, 218, 238, 0.95);
 }
 
 .notification-default-action .notification-content .time {
-    font-size:      9px;
-    color:          rgba(75, 77, 105, 0.52);
-    letter-spacing: 0.02em;
+    font-size: 9px;
+    color:     rgba(75, 77, 105, 0.52);
 }
 
 .notification-default-action .notification-content .body {
-    font-size:  11px;
-    color:      rgba(130, 133, 158, 0.74);
-    margin-top: 1px;
+    font-size: 11px;
+    color:     rgba(130, 133, 158, 0.74);
 }
 
 .notification-default-action .notification-content image {
     border-radius: 6px;
 }
 
-/* Close button */
 .close-button {
     background:    transparent;
     border:        1px solid transparent;
@@ -283,82 +257,44 @@ scale slider:hover {
     color:        rgba(195, 197, 218, 0.85);
 }
 
-/* ╔═══════════════════════════════════════════════════════════╗
-   ║  POPUP TOAST — Frosted Glass                             ║
-   ║                                                          ║
-   ║  SwayNC renders popups in a separate layer window.       ║
-   ║  We use a very low background alpha + border shimmer     ║
-   ║  to achieve the frosted glass look. True backdrop-filter ║
-   ║  blur requires compositor (Hyprland) to blur the layer.  ║
-   ║                                                          ║
-   ║  Add this to hyprland.conf for real blur:                ║
-   ║    layerrule = blur, swaync-notification-window          ║
-   ║    layerrule = ignorezero, swaync-notification-window    ║
-   ║    layerrule = ignorealpha 0.5, swaync-notification-window║
-   ╚═══════════════════════════════════════════════════════════╝ */
-
+/* ── Popup Toast ─────────────────────────────────────────── */
 .notification-popup {
-    /* Low alpha — Hyprland blur fills in the rest visually */
     background:    rgba(8, 8, 16, 0.92);
-
     border:        1px solid rgba(255, 255, 255, 0.13);
     border-top:    1px solid rgba(255, 255, 255, 0.22);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.35);
     border-radius: 14px;
     padding:       13px 15px 11px;
     margin:        6px;
     color:         rgba(230, 232, 248, 0.97);
-
     box-shadow:
-        /* outer glow rim */
-        0 0 0 1px rgba(0, 0, 0, 0.50),
-        /* depth shadow */
-        0 12px 40px rgba(0, 0, 0, 0.55),
-        0 4px  12px rgba(0, 0, 0, 0.35),
-        /* inner top shimmer */
-        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+        0 0 0 1px rgba(0,0,0,0.50),
+        0 12px 40px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(255,255,255,0.10);
 }
 
-/* App icon area */
-.notification-popup image {
-    border-radius: 8px;
-    margin-right:  4px;
-}
-
-/* Summary */
 .notification-popup .summary {
-    font-size:      13px;
-    font-weight:    600;
-    color:          rgba(228, 230, 250, 0.97);
-    letter-spacing: 0.01em;
+    font-size:   13px;
+    font-weight: 600;
+    color:       rgba(228, 230, 250, 0.97);
 }
 
-/* Time stamp */
 .notification-popup .time {
     font-size: 9px;
     color:     rgba(80, 82, 115, 0.55);
 }
 
-/* Body text */
 .notification-popup .body {
-    font-size:  11.5px;
-    color:      rgba(148, 152, 178, 0.82);
+    font-size: 11.5px;
+    color:     rgba(148, 152, 178, 0.82);
     margin-top: 2px;
-    line-height: 1.4;
 }
 
-/* Critical popup */
 .notification-popup.critical {
-    background:  rgba(12, 5, 5, 0.94);
     border-left: 2px solid rgba(235, 75, 65, 0.70);
-    box-shadow:
-        0 0 0 1px rgba(0,0,0,0.55),
-        0 12px 40px rgba(0,0,0,0.58),
-        inset 0 1px 0 rgba(255,255,255,0.08),
-        0 0 18px rgba(235,75,65,0.08);
+    background:  rgba(12, 5, 5, 0.94);
 }
 
-/* ── Notification action buttons (Reply, Dismiss, etc.) ───── */
+/* ── Action buttons ──────────────────────────────────────── */
 .notification-action {
     background:    rgba(255, 255, 255, 0.055);
     border:        1px solid rgba(255, 255, 255, 0.10);
@@ -374,35 +310,25 @@ scale slider:hover {
     background:   rgba(110, 122, 228, 0.16);
     border-color: rgba(110, 122, 228, 0.38);
     color:        rgba(175, 185, 255, 0.97);
-    box-shadow:   0 0 10px rgba(110,122,228,0.10);
 }
 
-.notification-action:active {
-    background:   rgba(110, 122, 228, 0.25);
-    border-color: rgba(110, 122, 228, 0.50);
-}
-
-/* Script button (Reply button specifically) */
-.notification-action.scriptButton,
-.notification-action[label*="Reply"] {
+.notification-action.scriptButton {
     background:   rgba(110, 122, 228, 0.10);
     border-color: rgba(110, 122, 228, 0.28);
     color:        rgba(155, 168, 245, 0.92);
 }
 
-.notification-action.scriptButton:hover,
-.notification-action[label*="Reply"]:hover {
+.notification-action.scriptButton:hover {
     background:   rgba(110, 122, 228, 0.22);
     border-color: rgba(110, 122, 228, 0.48);
     color:        rgba(190, 200, 255, 0.98);
-    box-shadow:   0 0 12px rgba(110,122,228,0.14);
 }
 
 /* ╔═══════════════════════════════════════════════════════════╗
-   ║  PhoneBridge — App-specific styles                       ║
+   ║  APP-SPECIFIC STYLES                                     ║
    ╚═══════════════════════════════════════════════════════════╝ */
 
-/* ── PhoneBridge status (persistent, no popup) ───────────── */
+/* ── PhoneBridge status bar ──────────────────────────────── */
 .notification[app-name="PhoneBridge"],
 .notification[app-name="phonebridge"] {
     background:    rgba(110, 122, 228, 0.04);
@@ -415,10 +341,9 @@ scale slider:hover {
 
 .notification[app-name="PhoneBridge"] .summary,
 .notification[app-name="phonebridge"] .summary {
-    font-size:      11px;
-    font-weight:    600;
-    color:          rgba(138, 150, 235, 0.90);
-    letter-spacing: 0.03em;
+    font-size:   11px;
+    font-weight: 600;
+    color:       rgba(138, 150, 235, 0.90);
 }
 
 .notification[app-name="PhoneBridge"] .body,
@@ -429,22 +354,78 @@ scale slider:hover {
 
 .notification[app-name="PhoneBridge"] .close-button,
 .notification[app-name="phonebridge"] .close-button {
-    opacity:    0;
-    min-width:  0;
-    min-height: 0;
+    opacity: 0; min-width: 0; min-height: 0;
 }
 
-/* Suppress popup toast for status notifications */
 .notification-popup[app-name="PhoneBridge"],
 .notification-popup[app-name="phonebridge"] {
-    opacity:    0;
-    min-height: 0;
-    min-width:  0;
-    padding:    0;
-    margin:     0;
-    border:     none;
-    background: transparent;
-    box-shadow: none;
+    opacity: 0; min-height: 0; min-width: 0;
+    padding: 0; margin: 0; border: none;
+    background: transparent; box-shadow: none;
+}
+
+/* ── Spotify ─────────────────────────────────────────────── */
+/* Panel card */
+.notification[app-name="Spotify"],
+.notification[app-name="spotify"] {
+    background:    rgba(30, 215, 96, 0.04);
+    border:        1px solid rgba(30, 215, 96, 0.10);
+    border-left:   2px solid rgba(30, 215, 96, 0.55);
+    border-radius: 10px;
+    padding:       10px 12px;
+}
+
+.notification[app-name="Spotify"] .summary,
+.notification[app-name="spotify"] .summary {
+    font-size:   12px;
+    font-weight: 600;
+    color:       rgba(100, 232, 148, 0.95);
+}
+
+.notification[app-name="Spotify"] .body,
+.notification[app-name="spotify"] .body {
+    font-size: 11px;
+    color:     rgba(55, 165, 88, 0.72);
+}
+
+/* album art image */
+.notification[app-name="Spotify"] image,
+.notification[app-name="spotify"] image {
+    border-radius: 6px;
+    border: 1px solid rgba(30, 215, 96, 0.15);
+}
+
+/* Popup toast */
+.notification-popup[app-name="Spotify"],
+.notification-popup[app-name="spotify"] {
+    background:  rgba(3, 14, 8, 0.93);
+    border:      1px solid rgba(30, 215, 96, 0.14);
+    border-top:  1px solid rgba(30, 215, 96, 0.28);
+    border-left: 2px solid rgba(30, 215, 96, 0.60);
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,0.50),
+        0 12px 40px rgba(0,0,0,0.55),
+        inset 0 1px 0 rgba(30,215,96,0.08),
+        0 0 22px rgba(30,215,96,0.05);
+}
+
+.notification-popup[app-name="Spotify"] .summary,
+.notification-popup[app-name="spotify"] .summary {
+    font-size:   13px;
+    font-weight: 600;
+    color:       rgba(110, 240, 158, 0.97);
+}
+
+.notification-popup[app-name="Spotify"] .body,
+.notification-popup[app-name="spotify"] .body {
+    font-size: 11.5px;
+    color:     rgba(60, 170, 95, 0.80);
+}
+
+.notification-popup[app-name="Spotify"] image,
+.notification-popup[app-name="spotify"] image {
+    border-radius: 8px;
+    border: 1px solid rgba(30, 215, 96, 0.20);
 }
 
 /* ── SMS — teal ──────────────────────────────────────────── */
@@ -478,11 +459,6 @@ scale slider:hover {
 .notification-popup.critical[app-name="PhoneBridge"] {
     border-left: 2px solid rgba(230, 180, 60, 0.80);
     background:  rgba(10, 8, 2, 0.94);
-    box-shadow:
-        0 0 0 1px rgba(0,0,0,0.55),
-        0 12px 40px rgba(0,0,0,0.58),
-        inset 0 1px 0 rgba(255,255,255,0.08),
-        0 0 20px rgba(230,180,60,0.07);
 }
 
 .notification-popup.critical[app-name="PhoneBridge"] .summary {
@@ -520,13 +496,8 @@ scale slider:hover {
 
 .notification[app-name="Telegram"] .summary { color: rgba(100, 185, 240, 0.90); }
 
-.notification-popup[app-name="Telegram"] {
-    background: rgba(2, 10, 16, 0.92);
-}
-
-.notification-popup[app-name="Telegram"] .summary {
-    color: rgba(112, 195, 248, 0.97);
-}
+.notification-popup[app-name="Telegram"] { background: rgba(2, 10, 16, 0.92); }
+.notification-popup[app-name="Telegram"] .summary { color: rgba(112, 195, 248, 0.97); }
 
 /* ── Signal ──────────────────────────────────────────────── */
 .notification[app-name="Signal"],
@@ -539,15 +510,10 @@ scale slider:hover {
     border-color: rgba(155, 95, 228, 0.10);
 }
 
-.notification[app-name="Signal"] .summary   { color: rgba(185, 148, 245, 0.90); }
+.notification[app-name="Signal"] .summary { color: rgba(185, 148, 245, 0.90); }
 
-.notification-popup[app-name="Signal"] {
-    background: rgba(8, 4, 16, 0.92);
-}
-
-.notification-popup[app-name="Signal"] .summary {
-    color: rgba(195, 158, 252, 0.97);
-}
+.notification-popup[app-name="Signal"] { background: rgba(8, 4, 16, 0.92); }
+.notification-popup[app-name="Signal"] .summary { color: rgba(195, 158, 252, 0.97); }
 
 /* ── Category fallback ───────────────────────────────────── */
 .notification[category="phonebridge-status"] {
@@ -556,11 +522,7 @@ scale slider:hover {
 }
 
 .notification-popup[category="phonebridge-status"] {
-    opacity:    0;
-    min-height: 0;
-    padding:    0;
-    margin:     0;
-    border:     0;
-    background: transparent;
-    box-shadow: none;
+    opacity: 0; min-height: 0;
+    padding: 0; margin: 0;
+    border: 0; background: transparent;
 }
