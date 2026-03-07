@@ -5,6 +5,31 @@ json_escape() {
   printf '%s' "$1" | sed ':a;N;$!ba;s/\\/\\\\/g;s/"/\\"/g;s/\n/\\n/g'
 }
 
+build_network_list() {
+  nmcli --rescan auto -t -f IN-USE,SSID,SIGNAL,SECURITY dev wifi list 2>/dev/null | \
+    awk -F: '
+      BEGIN { count = 0 }
+      {
+        ssid = $2
+        signal = $3
+        security = $4
+
+        if (ssid == "") next
+        if (seen[ssid]++) next
+
+        if (security == "" || security == "--") {
+          security = "open"
+        }
+
+        prefix = ($1 == "*") ? "• connected" : "•"
+        printf "%s %s  %s%%  [%s]\n", prefix, ssid, signal, security
+
+        count++
+        if (count >= 8) exit
+      }
+    '
+}
+
 if ! command -v nmcli >/dev/null 2>&1; then
   printf '{"text":" n/a","tooltip":"nmcli not found","class":"off"}\n'
   exit 0
@@ -16,9 +41,17 @@ if [ "$wifi_state" != "enabled" ]; then
   exit 0
 fi
 
+available_networks="$(build_network_list || true)"
+
 active_line="$(nmcli -t -f IN-USE,SSID,SIGNAL,RATE,BARS dev wifi list 2>/dev/null | awk -F: '$1=="*" {print; exit}')"
 if [ -z "$active_line" ]; then
-  printf '{"text":" on","tooltip":"Wi-Fi enabled (not connected)\\nLeft click: open settings\\nRight click: toggle","class":"on"}\n'
+  tooltip="Wi-Fi enabled (not connected)"
+  if [ -n "$available_networks" ]; then
+    tooltip="${tooltip}\n\nAvailable networks:\n${available_networks}"
+  fi
+  tooltip="${tooltip}\n\nLeft click: open settings\nRight click: toggle"
+
+  printf '{"text":" on","tooltip":"%s","class":"on"}\n' "$(json_escape "$tooltip")"
   exit 0
 fi
 
@@ -33,9 +66,14 @@ bars="$(printf '%s' "$active_line" | cut -d: -f5)"
 [ -n "$bars" ] || bars="n/a"
 
 text=" ${signal}%"
-tooltip="SSID: ${ssid}\nSignal: ${signal}%\nRate: ${rate}\nBars: ${bars}\nLeft click: open settings\nRight click: toggle"
+tooltip="Connected to: ${ssid}\nSignal: ${signal}%\nRate: ${rate}\nBars: ${bars}"
+
+if [ -n "$available_networks" ]; then
+  tooltip="${tooltip}\n\nAvailable networks:\n${available_networks}"
+fi
+
+tooltip="${tooltip}\n\nLeft click: open settings\nRight click: toggle"
 
 printf '{"text":"%s","tooltip":"%s","class":"on"}\n' \
   "$(json_escape "$text")" \
   "$(json_escape "$tooltip")"
-
