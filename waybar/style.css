@@ -5,7 +5,7 @@
 
 * {
     font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 11px;
+    font-size: 12.5px;
 }
 
 /* ── Bar root ────────────────────────────────────────────── */
@@ -17,29 +17,29 @@ window#waybar {
 
 /* ── Left island ─────────────────────────────────────────── */
 .modules-left {
-    background-color: rgba(8, 8, 12, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
-    padding: 1px 3px;
-    margin: 5px 0 5px 8px;
+    background-color: rgba(30, 30, 46, 0.7);
+    border: none;
+    border-radius: 14px;
+    padding: 2px 5px;
+    margin: 6px 0 6px 12px;
 }
 
 /* ── Center island ───────────────────────────────────────── */
 .modules-center {
-    background-color: rgba(6, 6, 10, 0.62);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 1px 4px;
-    margin: 4px 0;
+    background-color: rgba(30, 30, 46, 0.7);
+    border: none;
+    border-radius: 14px;
+    padding: 2px 6px;
+    margin: 6px 0;
 }
 
 /* ── Right island ────────────────────────────────────────── */
 .modules-right {
-    background-color: rgba(8, 8, 12, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
-    padding: 1px 3px;
-    margin: 5px 8px 5px 0;
+    background-color: rgba(30, 30, 46, 0.7);
+    border: none;
+    border-radius: 14px;
+    padding: 2px 5px;
+    margin: 6px 12px 6px 0;
 }
 
 /* ── Workspaces ──────────────────────────────────────────── */
@@ -52,45 +52,46 @@ window#waybar {
 
 #workspaces button {
     min-width: 8px;
-    margin: 0 2px;
-    padding: 4px 6px;
-    border-radius: 7px;
+    margin: 0 4px;
+    padding: 4px 8px;
+    border-radius: 10px;
     border: none;
     background-color: transparent;
-    color: rgba(75, 77, 96, 0.70);
-    font-size: 11px;
+    color: rgba(180, 190, 254, 0.70);
+    font-size: 13px;
+    transition: all 0.3s ease;
 }
 
 #workspaces button.active {
-    color: rgba(220, 222, 238, 0.96);
-    background-color: rgba(255, 255, 255, 0.09);
-    border-radius: 7px;
-    padding: 4px 9px;
-    font-weight: 600;
+    color: rgba(30, 30, 46, 0.96);
+    background-color: rgba(180, 190, 254, 0.9);
+    border-radius: 10px;
+    padding: 4px 12px;
+    font-weight: 700;
 }
 
 #workspaces button.occupied {
-    color: rgba(138, 140, 162, 0.65);
+    color: rgba(205, 214, 244, 0.65);
 }
 
 #workspaces button:hover {
-    color: rgba(195, 197, 215, 0.88);
-    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(30, 30, 46, 0.88);
+    background-color: rgba(180, 190, 254, 0.6);
 }
 
 #workspaces button.urgent {
-    color: rgba(255, 160, 150, 0.96);
-    background-color: rgba(255, 65, 52, 0.12);
+    color: rgba(243, 139, 168, 0.96);
+    background-color: rgba(243, 139, 168, 0.2);
 }
 
 /* ── Clock ───────────────────────────────────────────────── */
 #clock {
-    font-size: 11px;
-    font-weight: 500;
-    color: rgba(220, 222, 236, 0.95);
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(205, 214, 244, 0.95);
     background-color: transparent;
     border: none;
-    padding: 3px 10px;
+    padding: 3px 14px;
     margin: 0;
 }
 
@@ -108,13 +109,12 @@ window#waybar {
 #backlight,
 #idle_inhibitor,
 #tray {
-    background-color: rgba(255, 255, 255, 0.034);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 7px;
-    color: rgba(165, 167, 188, 0.82);
-    margin: 2px 1px;
-    padding: 1px 7px;
-    font-size: 11px;
+    background-color: transparent;
+    border: none;
+    color: rgba(205, 214, 244, 0.82);
+    margin: 0 4px;
+    padding: 2px 8px;
+    font-size: 13px;
 }
 
 /* ── Battery ─────────────────────────────────────────────── */
@@ -170,11 +170,11 @@ window#waybar {
     padding: 1px 6px;
 }
 
-#tray > .passive {
+#tray>.passive {
     -gtk-icon-effect: dim;
 }
 
-#tray > .needs-attention {
+#tray>.needs-attention {
     -gtk-icon-effect: highlight;
 }
 
