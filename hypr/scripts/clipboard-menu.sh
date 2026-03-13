@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Toggle behavior: if the Clipboard menu is already open, close it.
+if command -v pgrep >/dev/null 2>&1 && command -v pkill >/dev/null 2>&1; then
+  if pgrep -af 'wofi.*--dmenu.*--prompt[= ]Clipboard' >/dev/null 2>&1; then
+    pkill -f 'wofi.*--dmenu.*--prompt[= ]Clipboard' >/dev/null 2>&1 || true
+    exit 0
+  fi
+fi
+
 for cmd in cliphist wofi wl-copy; do
   if ! command -v "$cmd" >/dev/null 2>&1; then
     command -v notify-send >/dev/null 2>&1 && notify-send "Clipboard failed" "Missing command: $cmd"
