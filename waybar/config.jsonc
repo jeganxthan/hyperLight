@@ -6,17 +6,25 @@
     "margin-top": 8,
     "margin-left": 16,
     "margin-right": 16,
-
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["tray", "pulseaudio", "custom/wifi", "custom/bluetooth", "custom/screenrec", "battery"],
-
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "tray",
+        "pulseaudio",
+        "custom/wifi",
+        "custom/bluetooth",
+        "custom/screenrec",
+        "battery"
+    ],
     "clock": {
         "format": "  {:%a %d %b  %H:%M}",
         "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt>{calendar}</tt>",
         "interval": 1
     },
-
     "pulseaudio": {
         "format": "{icon}  {volume}%",
         "format-muted": "  muted",
@@ -27,11 +35,14 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "scroll-step": 5
     },
-
     "network": {
         "format-wifi": "  {signalStrength}%",
         "format-ethernet": "󰈀  connected",
@@ -40,7 +51,6 @@
         "on-click": "/home/jegan/.config/hypr/scripts/wifi-manager.sh",
         "on-click-right": "bash -c 'STATE=$(nmcli -t -f WIFI g); if echo \"$STATE\" | grep -q enabled; then nmcli radio wifi off; else nmcli radio wifi on; fi'"
     },
-
     "custom/wifi": {
         "return-type": "json",
         "exec": "/home/jegan/.config/waybar/scripts/wifi-status.sh",
@@ -48,7 +58,6 @@
         "on-click": "/home/jegan/.config/hypr/scripts/wifi-manager.sh",
         "on-click-right": "bash -c 'STATE=$(nmcli -t -f WIFI g); if echo \"$STATE\" | grep -q enabled; then nmcli radio wifi off; else nmcli radio wifi on; fi'"
     },
-
     "custom/bluetooth": {
         "return-type": "json",
         "exec": "/home/jegan/.config/waybar/scripts/bluetooth-status.sh",
@@ -56,7 +65,6 @@
         "on-click": "/home/jegan/.config/hypr/scripts/bluetooth-manager.sh",
         "on-click-right": "sh -c 'if bluetoothctl show | grep -q \"Powered: yes\"; then bluetoothctl power off; else bluetoothctl power on; fi'"
     },
-
     "custom/screenrec": {
         "return-type": "json",
         "exec-if": "pgrep -x wf-recorder >/dev/null",
@@ -64,7 +72,6 @@
         "interval": 1,
         "on-click": "/home/jegan/.config/hypr/scripts/screenrec-toggle.sh"
     },
-
     "battery": {
         "states": {
             "warning": 30,
@@ -73,30 +80,35 @@
         "format": "{icon}  {capacity}%",
         "format-charging": "  {capacity}%",
         "format-plugged": "  {capacity}%",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ]
     },
-
     "tray": {
         "spacing": 6
     },
     "hyprland/workspaces": {
-    "format": "{id}",
-    "on-click": "activate"
-},
-"custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-        "notification": "󱅫",
-        "none": "󰂚",
-        "dnd-notification": "󱅫",
-        "dnd-none": "󰂛"
+        "format": "{id}",
+        "on-click": "activate"
     },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-}
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󱅫",
+            "none": "󰂚",
+            "dnd-notification": "󱅫",
+            "dnd-none": "󰂛"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
 }

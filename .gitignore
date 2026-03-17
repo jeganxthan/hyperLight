@@ -83,3 +83,4 @@ systemd/user/default.target.wants/
 # Local Backups
 # =========================
 *.bak_codex_*
+eww_build/
