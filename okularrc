@@ -12,7 +12,7 @@ MenuBar=Disabled
 
 [Recent Files]
 File1[$e]=$HOME/speed_all.pdf
-File10[$e]=$HOME/geofences.pdf
+File10[$e]=$HOME/geofence_report.pdf
 File2[$e]=$HOME/geofence_all.pdf
 File3[$e]=$HOME/geofence_today.pdf
 File4[$e]=$HOME/mileage_datewise_week.pdf
@@ -20,9 +20,9 @@ File5[$e]=$HOME/mileage_datewise_selected_week.pdf
 File6[$e]=$HOME/mileage_all.pdf
 File7[$e]=$HOME/Downloads/rust-programming-language-steve-klabnik.pdf
 File8[$e]=$HOME/Desktop/Ridemap/traccar/geofence_report.pdf
-File9[$e]=$HOME/geofence_report.pdf
+File9[$e]=$HOME/geofences.pdf
 Name1[$e]=speed_all.pdf
-Name10[$e]=geofences.pdf
+Name10[$e]=geofence_report.pdf
 Name2[$e]=geofence_all.pdf
 Name3[$e]=geofence_today.pdf
 Name4[$e]=mileage_datewise_week.pdf
@@ -30,4 +30,4 @@ Name5[$e]=mileage_datewise_selected_week.pdf
 Name6[$e]=mileage_all.pdf
 Name7[$e]=rust-programming-language-steve-klabnik.pdf
 Name8[$e]=geofence_report.pdf
-Name9[$e]=geofence_report.pdf
+Name9[$e]=geofences.pdf

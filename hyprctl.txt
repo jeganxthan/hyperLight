@@ -1,0 +1,14 @@
+Hyprland 0.54.2 built from branch v0.54.2 at commit 59f9f2688ac508a0584d1462151195a6c4992f99 clean (version: bump to 0.54.2).
+Date: Tue Mar 10 13:26:58 2026
+Tag: v0.54.2, commits: 6998
+
+Libraries:
+Hyprgraphics: built against 0.5.0, system has 0.5.0
+Hyprutils: built against 0.11.0, system has 0.11.1
+Hyprcursor: built against 0.1.13, system has 0.1.13
+Hyprlang: built against 0.6.8, system has 0.6.8
+Aquamarine: built against 0.10.0, system has 0.10.0
+
+Version ABI string: 59f9f2688ac508a0584d1462151195a6c4992f99_aq_0.10_hu_0.11_hg_0.5_hc_0.1_hlg_0.6
+no flags were set
+

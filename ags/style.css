@@ -1,5 +1,6 @@
 * {
     font-family: "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans", sans-serif;
+    font-size: 85%;
     color: #ffffff;
     transition: background 0.2s ease, border-color 0.2s ease;
 }
@@ -9,7 +10,7 @@ window {
 }
 
 .cc-root {
-    padding: 12px;
+    padding: 6px;
 }
 
 /* -------------------------
@@ -18,131 +19,105 @@ window {
 
 .tile {
     background: rgba(255, 255, 255, 0.01);
-
-    border-radius: 18px;
-    padding: 14px;
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .tile:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .tile-big {
-    min-height: 130px;
+    min-height: 80px;
 }
 
 /* -------------------------
    Special Tiles
 ------------------------- */
 
-.tile-wifi {
-    background: rgba(255, 255, 255, 0.01);
-
-    border-radius: 999px;
-    padding: 14px;
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
-
-    box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
+.tile-wifi,
 .tile-music {
     background: rgba(255, 255, 255, 0.01);
-
     border-radius: 999px;
-    padding: 14px;
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.tile-slider {}
+.tile-wifi.active-btn .tile-icon-wrap {
+    background: #ffffff;
+}
+
+.tile-wifi.active-btn .tile-icon,
+.tile-wifi.active-btn image {
+    color: #007bff;
+    -gtk-icon-palette: success #007bff, error #007bff, warning #007bff;
+}
 
 /* -------------------------
    Circle Buttons Active State
 ------------------------- */
 
-/* -------------------------
-   Circle Buttons Active State
-------------------------- */
-
-/* Active buttons: white background */
 .circle-btn.active-btn {
     background: #ffffff;
-    /* White background */
     border-color: #ffffff;
-    /* Match border to background */
 }
 
-/* Icon inside active button stays blue */
-.circle-btn.active-btn .circle-icon {
+.circle-btn.active-btn .circle-icon,
+.circle-btn.active-btn image,
+.circle-btn.active-btn * {
     color: #007bff;
-    /* Blue icon */
+    -gtk-icon-palette: success #007bff, error #007bff, warning #007bff;
 }
 
-/* Hover for active buttons (slightly lighter blue background for icon effect) */
-.circle-btn.active-btn:hover {
-    background: #f0f0f0;
-    /* Slightly lighter white */
-}
 
-/* Default inactive icon: white on transparent bg */
 .circle-btn.icon-white {
     background: rgba(255, 255, 255, 0.01);
-    /* Transparent */
-    border-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.05);
 }
 
 .circle-btn.icon-white .circle-icon {
     color: #ffffff;
-    /* White icon for inactive */
 }
 
-/* Hover for inactive buttons */
 .circle-btn.icon-white:hover {
-    background: rgba(255, 255, 255, 0.05);
-    /* Subtle highlight */
+    background: rgba(255, 255, 255, 0.04);
 }
+
+/* -------------------------
+   Icons & Text
+------------------------- */
 
 .tile-icon-wrap {
-    min-width: 10px;
-    min-height: 22px;
-    background: rgba(255, 255, 255, 0.01);
-
+    min-width: 8px;
+    min-height: 18px;
+    padding: 6px;
     border-radius: 999px;
 
-    padding: 8px;
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
-
-    box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .tile-icon {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .tile-title {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
 }
 
 .tile-subtitle {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.65);
 }
 
 /* -------------------------
@@ -150,17 +125,13 @@ window {
 ------------------------- */
 
 .album-art {
-
-    min-width: 52px;
-    min-height: 52px;
-
-    border-radius: 12px;
-
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 8px;
     background-size: cover;
 }
 
 .album-art-mock {
-
     background: linear-gradient(135deg,
             #c0392b 0%,
             #e74c3c 55%,
@@ -168,64 +139,79 @@ window {
 }
 
 .music-title {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
+    margin-left: 6px;
 }
 
 .music-subtitle {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.55);
+    font-size: 10px;
+    margin-left: 6px;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 /* -------------------------
    Playback Buttons
 ------------------------- */
-
 .control-btn {
-
     background: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
 
+    min-width: 36px;     /* 🔼 increase size */
+    min-height: 36px;
+
+    padding: 8px;        /* 🔼 more breathing room */
     border-radius: 999px;
-
-    padding: 8px;
-
-    font-size: 20px;
 }
 
 .control-btn:hover {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.05);
 }
 
+.control-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* 🔥 control icon size separately */
+.control-icon {
+    font-size: 18px;   /* increase icon size */
+}
 /* -------------------------
    Circle Buttons
 ------------------------- */
 
 .circle-btn {
-
-    min-width: 32px;
-    min-height: 52px;
+    min-width: 26px;
+    min-height: 40px;
 
     background: rgba(255, 255, 255, 0.01);
-
     border-radius: 999px;
 
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.focus-text {
+    font-size: 10px;
+    margin-left: 2px;
 }
 
 .circle-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
 }
 
 .circle-icon {
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .mini-icon {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 /* -------------------------
@@ -233,26 +219,35 @@ window {
 ------------------------- */
 
 .pill {
-
     background: rgba(255, 255, 255, 0.01);
-
     border-radius: 999px;
+    padding: 6px 10px;
 
-    padding: 12px 18px;
-
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 
     box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 2px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .pill:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.pill.active-btn {
+    background: #ffffff;
+}
+
+.pill.active-btn .pill-icon,
+.pill.active-btn label,
+.pill.active-btn image,
+.pill.active-btn * {
+    color: #007bff;
+    -gtk-icon-palette: success #007bff, error #007bff, warning #007bff;
 }
 
 .pill-icon {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 /* -------------------------
@@ -260,14 +255,14 @@ window {
 ------------------------- */
 
 .section-label {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .slider-icon {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
 }
 
 /* -------------------------
@@ -275,42 +270,31 @@ window {
 ------------------------- */
 
 .cc-slider {
-    min-width: 100px;
-    margin: 0 6px;
+    min-width: 80px;
+    margin: 0 4px;
 }
 
 .cc-slider trough {
-
-    min-height: 3px;
-
+    min-height: 2px;
     border-radius: 999px;
-
-    background: rgba(255, 255, 255, 0.15);
-
-    box-shadow:
-        inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .cc-slider highlight {
-
-    min-height: 5px;
-
+    min-height: 3px;
     border-radius: 999px;
-
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.85);
 }
 
 .cc-slider slider {
-
-    min-width: 10px;
-    min-height: 10px;
+    min-width: 8px;
+    min-height: 8px;
 
     border-radius: 999px;
-
     background: #ffffff;
 
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.4);
 
     box-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.25);
+        0 1px 4px rgba(0, 0, 0, 0.25);
 }

@@ -13,6 +13,85 @@
    red         235,75,65      critical
    spotify     30,215,96      Spotify green
 */
+/* ---------- Root Window ---------- */
+window,
+.cc-root {
+    background: #000000;
+    /* full black background */
+    color: #ffffff;
+    /* default text white */
+}
+
+/* ---------- Tiles ---------- */
+.tile,
+.tile-big,
+.tile-wifi,
+.tile-music,
+.pill,
+.circle-btn {
+    background: #0d0d0d;
+    /* slightly lighter black for tiles */
+    border: 1px solid #1a1a1a;
+    /* subtle border to separate tiles */
+    box-shadow: none;
+    /* remove inset shadows */
+}
+
+/* Hover effect */
+.tile:hover,
+.tile-wifi:hover,
+.tile-music:hover,
+.pill:hover,
+.circle-btn:hover {
+    background: #1a1a1a;
+    /* hover slightly lighter */
+}
+
+/* ---------- Circle Buttons ---------- */
+.circle-btn {
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+    border-radius: 999px;
+    /* perfect circle */
+    background: #0d0d0d;
+    /* solid dark tile */
+    border: 1px solid #1a1a1a;
+}
+
+/* Active Circle Button */
+.circle-btn.active-btn {
+    background: #ffffff;
+    /* active white background */
+    border-color: #ffffff;
+}
+
+.circle-btn.active-btn .circle-icon {
+    color: #007bff;
+    /* active icon color */
+}
+
+/* Icons */
+.circle-icon,
+.tile-icon,
+.pill-icon {
+    color: #ffffff;
+    /* all icons white by default */
+}
+
+/* Slider */
+.cc-slider trough {
+    background: #1a1a1a;
+}
+
+.cc-slider highlight {
+    background: #ffffff;
+}
+
+.cc-slider slider {
+    background: #ffffff;
+    border: 1px solid #cccccc;
+}
 
 * {
     font-family: "JetBrainsMono Nerd Font", "Iosevka Nerd Font", monospace;
@@ -43,7 +122,7 @@ scrollbar slider:active {
 
 /* ── Control Center ──────────────────────────────────────── */
 .control-center {
-    background: rgba(30, 30, 46, 0.7);
+    background: rgba(0, 0, 0, 0.7);
     border: none;
     border-radius: 14px;
     padding: 14px 12px 12px;
@@ -109,8 +188,8 @@ scrollbar slider:active {
 }
 
 .widget-dnd>switch:checked {
-    background: rgba(110, 122, 228, 0.55);
-    border-color: rgba(110, 122, 228, 0.70);
+    background: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.70);
 }
 
 .widget-dnd>switch slider {
@@ -151,7 +230,7 @@ scale trough {
 }
 
 scale highlight {
-    background: rgba(110, 122, 228, 0.58);
+    background: rgba(255, 255, 255, 0.58);
     border-radius: 999px;
 }
 
@@ -182,7 +261,7 @@ scale slider:hover {
     border-radius: 10px;
     color: rgba(255, 255, 255, 0.85);
     font-size: 18px;
-    min-width: 86px;
+    min-width: 74px;
     min-height: 48px;
     padding: 0;
     font-family: "JetBrainsMono Nerd Font", monospace;
@@ -196,9 +275,9 @@ scale slider:hover {
 
 .widget-buttons-grid>flowbox>flowboxchild>button.active,
 .widget-buttons-grid>flowbox>flowboxchild>button:checked {
-    background: rgba(180, 190, 254, 0.9);
-    border: 1px solid rgba(180, 190, 254, 1.0);
-    color: rgba(30, 30, 46, 1.0);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 1.0);
+    color: rgba(0, 0, 0, 1.0);
 }
 
 /* ── Notification cards (panel) ──────────────────────────── */
@@ -268,7 +347,7 @@ scale slider:hover {
 
 /* ── Popup Toast ─────────────────────────────────────────── */
 .notification-popup {
-    background: rgba(30, 30, 46, 0.7);
+    background: rgba(0, 0, 0, 0.7);
     border: none;
     border-radius: 14px;
     padding: 13px 15px 11px;
@@ -312,21 +391,21 @@ scale slider:hover {
 }
 
 .notification-action:hover {
-    background: rgba(110, 122, 228, 0.16);
-    border-color: rgba(110, 122, 228, 0.38);
-    color: rgba(175, 185, 255, 0.97);
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.38);
+    color: rgba(255, 255, 255, 0.97);
 }
 
 .notification-action.scriptButton {
-    background: rgba(110, 122, 228, 0.10);
-    border-color: rgba(110, 122, 228, 0.28);
-    color: rgba(155, 168, 245, 0.92);
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: rgba(255, 255, 255, 0.92);
 }
 
 .notification-action.scriptButton:hover {
-    background: rgba(110, 122, 228, 0.22);
-    border-color: rgba(110, 122, 228, 0.48);
-    color: rgba(190, 200, 255, 0.98);
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.48);
+    color: rgba(255, 255, 255, 0.98);
 }
 
 /* ╔═══════════════════════════════════════════════════════════╗
