@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-wofi_style="${HOME}/.config/wofi/style.css"
+rofi_theme="${HOME}/.config/rofi/themes/black-transparent.rasi"
 prompt="Wi-Fi"
-menu_match="wofi --dmenu --prompt ${prompt}"
+menu_match="rofi -dmenu -p ${prompt}"
 
 notify() {
   if command -v notify-send >/dev/null 2>&1; then
@@ -16,8 +16,8 @@ if ! command -v nmcli >/dev/null 2>&1; then
   exit 1
 fi
 
-if ! command -v wofi >/dev/null 2>&1; then
-  notify "Wi-Fi manager" "wofi is not installed."
+if ! command -v rofi >/dev/null 2>&1; then
+  notify "Wi-Fi manager" "rofi is not installed."
   exit 1
 fi
 
@@ -30,21 +30,19 @@ wifi_state="$(nmcli -t -f WIFI g 2>/dev/null | head -n1 || true)"
 active_ssid="$(nmcli -t -f ACTIVE,SSID dev wifi list 2>/dev/null | awk -F: '$1=="yes" {print $2; exit}')"
 
 menu_input() {
-  wofi --dmenu \
-    --prompt "$prompt" \
-    --style "$wofi_style" \
-    --width 820 \
-    --height 560 \
-    --hide-scroll
+  rofi -dmenu \
+    -p "$prompt" \
+    -theme "$rofi_theme" \
+    -i \
+    -kb-custom-1 "Alt+r" \
+    -kb-custom-2 "Alt+a"
 }
 
 password_input() {
-  wofi --dmenu \
-    --prompt "Password" \
-    --style "$wofi_style" \
-    --width 520 \
-    --height 220 \
-    --password
+  rofi -dmenu \
+    -p "Password" \
+    -theme "$rofi_theme" \
+    -password
 }
 
 open_advanced() {
@@ -144,11 +142,9 @@ connect_hidden() {
   local ssid password
 
   ssid="$(
-    wofi --dmenu \
-      --prompt "Hidden SSID" \
-      --style "$wofi_style" \
-      --width 520 \
-      --height 220 || true
+    rofi -dmenu \
+      -p "Hidden SSID" \
+      -theme "$rofi_theme" || true
   )"
 
   [ -n "${ssid:-}" ] || exit 0

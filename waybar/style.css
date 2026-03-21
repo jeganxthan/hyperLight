@@ -11,14 +11,14 @@
 /* ── Bar root ────────────────────────────────────────────── */
 window#waybar {
     background-color: transparent;
-    color: rgba(210, 212, 224, 0.92);
+    color: rgba(255, 255, 255, 0.9);
     border: none;
 }
 
 /* ── Left island ─────────────────────────────────────────── */
 .modules-left {
-    background-color: rgba(0, 0, 0, 0.7);
-    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 2px 5px;
     margin: 6px 0 6px 12px;
@@ -26,8 +26,8 @@ window#waybar {
 
 /* ── Center island ───────────────────────────────────────── */
 .modules-center {
-    background-color: rgba(0, 0, 0, 0.7);
-    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 2px 6px;
     margin: 6px 0;
@@ -35,8 +35,8 @@ window#waybar {
 
 /* ── Right island ────────────────────────────────────────── */
 .modules-right {
-    background-color: rgba(0, 0, 0, 0.7);
-    border: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
     padding: 2px 5px;
     margin: 6px 12px 6px 0;

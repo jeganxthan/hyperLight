@@ -1,86 +1,41 @@
 # =========================
+# Whitelist Dotfiles
+# =========================
+
+# Ignore everything by default
+*
+
+# Allow the specific config directories
+!/hypr/
+!/waybar/
+!/swaync/
+!/rofi/
+!/kitty/
+!/ags/
+!/wofi/
+!/wlogout/
+!/cava/
+!/qt6ct/
+
+# Allow root level config files
+!.gitignore
+!README.md
+
+# Ignore potential sensitive files within those directories
+**/login.conf
+**/credentials*
+**/*.log
+**/*.tmp
+**/*.cache
+**/*.pid
+**/*.lock
+**/*.bak
+**/*.old
+**/*.swp
+**/*.swo
+
+# =========================
 # System / OS
 # =========================
 .DS_Store
 Thumbs.db
-
-# =========================
-# Editor / Cache / Temp
-# =========================
-*.log
-*.tmp
-*.cache
-*.pid
-*.lock
-*.bak
-*.old
-*.swp
-*.swo
-*.orig
-*.rej
-.directory
-.Trash-*/
-.history/
-.vscode/
-.idea/
-
-# =========================
-# Personal App Data (exclude from repo)
-# =========================
-BraveSoftware/
-google-chrome/
-Google/
-mozilla/
-Code/
-.android/
-*.avd/
-*.img
-.local/share/Trash/
-.cache/
-.gradle/
-local.properties
-Electron/
-Kingsoft/
-Postman/
-spotify/
-Spotify/
-
-# =========================
-# Runtime / Local Machine State
-# =========================
-session/
-pulse/
-dconf/
-QtProject.conf
-kwalletrc
-yay/
-user-dirs.dirs
-user-dirs.locale
-trashrc
-baloofileinformationrc
-mimeapps.list
-.xsession-errors*
-
-# =========================
-# Build Outputs
-# =========================
-node_modules/
-dist/
-build/
-coverage/
-tmp/
-temp/
-
-# =========================
-# Unrelated Projects / Toolchains
-# =========================
-Antigravity/
-go/
-nvm/
-systemd/user/default.target.wants/
-
-# =========================
-# Local Backups
-# =========================
-*.bak_codex_*
-eww_build/

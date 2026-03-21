@@ -20,9 +20,12 @@ done
 
 [ -n "$wallpaper_dir" ] || exit 1
 
+rofi_theme="${HOME}/.config/rofi/themes/wallpaper-grid.rasi"
+menu_match="rofi -dmenu -i -p Wallpaper Picker -theme $rofi_theme"
+
 # Toggle behavior: if this picker is already open, close it.
-if pgrep -af "wofi --dmenu --allow-images --allow-markup --prompt Wallpaper Picker" >/dev/null 2>&1; then
-  pkill -f "wofi --dmenu --allow-images --allow-markup --prompt Wallpaper Picker" >/dev/null 2>&1 || true
+if pgrep -af "$menu_match" >/dev/null 2>&1; then
+  pkill -f "$menu_match" >/dev/null 2>&1 || true
   exit 0
 fi
 
@@ -35,27 +38,16 @@ selection="$(
   {
     for img in "${images[@]}"; do
       rel="${img#"$wallpaper_dir/"}"
-      # Wofi image escape syntax. Shows thumbnail and keeps filename text.
-      printf 'img:%s:text:%s\n' "$img" "$rel"
+      # Rofi icon syntax: name\0icon\x1f/path/to/icon
+      printf '%s\0icon\x1f%s\n' "$rel" "$img"
     done
-  } | wofi --dmenu --allow-images --allow-markup \
-      --prompt "Wallpaper Picker" \
-      --style "$HOME/.config/wofi/style-wallpicker.css" \
-      --width 1240 \
-      --height 720 \
-      --hide-scroll \
-      --define "allow_images=true" \
-      --define "image_size=196"
+  } | rofi -dmenu -i -p "Wallpaper Picker" \
+      -theme "$rofi_theme" \
+      -show-icons
 )"
 [ -n "${selection:-}" ] || exit 0
 
-# Selected line can be "img:/abs/path:text:filename". Parse image path safely.
-if [[ "$selection" == img:*:text:* ]]; then
-  wallpaper="${selection#img:}"
-  wallpaper="${wallpaper%%:text:*}"
-else
-  wallpaper="$wallpaper_dir/$selection"
-fi
+wallpaper="$wallpaper_dir/$selection"
 [ -f "$wallpaper" ] || exit 1
 
 if [ -x "$HOME/.config/hypr/scripts/wallpaper-apply.sh" ]; then
