@@ -1,5 +1,5 @@
 [Desktop Entry]
-FullScreen=true
+FullScreen=false
 shouldShowMenuBarComingFromFullScreen=true
 shouldShowToolBarComingFromFullScreen=true
 
@@ -7,27 +7,24 @@ shouldShowToolBarComingFromFullScreen=true
 LockSidebar=true
 ShowSidebar=true
 
-[MainWindow]
-MenuBar=Disabled
-
 [Recent Files]
-File1[$e]=$HOME/geofence_all.pdf
-File10[$e]=$HOME/report.pdf
-File2[$e]=$HOME/geofence_today.pdf
-File3[$e]=$HOME/mileage_datewise_week.pdf
-File4[$e]=$HOME/mileage_datewise_selected_week.pdf
-File5[$e]=$HOME/mileage_all.pdf
-File6[$e]=$HOME/Downloads/rust-programming-language-steve-klabnik.pdf
-File7[$e]=$HOME/Desktop/Ridemap/traccar/geofence_report.pdf
-File8[$e]=$HOME/geofences.pdf
-File9[$e]=$HOME/geofence_report.pdf
-Name1[$e]=geofence_all.pdf
-Name10[$e]=report.pdf
-Name2[$e]=geofence_today.pdf
-Name3[$e]=mileage_datewise_week.pdf
-Name4[$e]=mileage_datewise_selected_week.pdf
-Name5[$e]=mileage_all.pdf
-Name6[$e]=rust-programming-language-steve-klabnik.pdf
-Name7[$e]=geofence_report.pdf
-Name8[$e]=geofences.pdf
-Name9[$e]=geofence_report.pdf
+File1[$e]=$HOME/Desktop/Ridemap/traccar/geofence_report.pdf
+File10[$e]=$HOME/mileage.pdf
+File2[$e]=$HOME/geofences.pdf
+File3[$e]=$HOME/geofence_report.pdf
+File4[$e]=$HOME/reportnormal.pdf
+File5[$e]=$HOME/report.pdf
+File6[$e]=$HOME/geofence-report.pdf
+File7[$e]=$HOME/mileage-report.pdf
+File8[$e]=$HOME/mileage-datewise-report.pdf
+File9[$e]=$HOME/speed-report.pdf
+Name1[$e]=geofence_report.pdf
+Name10[$e]=mileage.pdf
+Name2[$e]=geofences.pdf
+Name3[$e]=geofence_report.pdf
+Name4[$e]=reportnormal.pdf
+Name5[$e]=report.pdf
+Name6[$e]=geofence-report.pdf
+Name7[$e]=mileage-report.pdf
+Name8[$e]=mileage-datewise-report.pdf
+Name9[$e]=speed-report.pdf
