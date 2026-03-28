@@ -67,9 +67,9 @@
     },
     "custom/screenrec": {
         "return-type": "json",
-        "exec-if": "pgrep -x wf-recorder >/dev/null",
         "exec": "/home/jegan/.config/waybar/scripts/screenrec-status.sh",
         "interval": 1,
+        "signal": 8,
         "on-click": "/home/jegan/.config/hypr/scripts/screenrec-toggle.sh"
     },
     "battery": {
