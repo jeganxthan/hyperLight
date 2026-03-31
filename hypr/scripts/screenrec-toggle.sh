@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-pid_file="${XDG_RUNTIME_DIR:-/tmp}/wf-recorder.pid"
-last_file="${XDG_RUNTIME_DIR:-/tmp}/wf-recorder.last"
+pid_file="${XDG_RUNTIME_DIR:-/tmp}/gsr.pid"
+last_file="${XDG_RUNTIME_DIR:-/tmp}/gsr.last"
 out_dir="$HOME/Videos/Recordings"
 mkdir -p "$out_dir"
 waybar_signal=8
@@ -27,7 +27,7 @@ find_running_pid() {
     fi
   fi
 
-  pgrep -n -x wf-recorder 2>/dev/null || true
+  pgrep -n -x gpu-screen-rec 2>/dev/null || true
 }
 
 stop_recording() {
@@ -36,22 +36,23 @@ stop_recording() {
   local waited=0
 
   if [ -n "$pid" ] && kill -0 "$pid" >/dev/null 2>&1; then
-    kill -INT -- "-$pid" >/dev/null 2>&1 || kill -INT "$pid" >/dev/null 2>&1 || kill "$pid" >/dev/null 2>&1 || true
+    # gpu-screen-recorder saves on SIGINT
+    kill -INT "$pid" >/dev/null 2>&1 || true
     while kill -0 "$pid" >/dev/null 2>&1; do
       sleep 0.1
       waited=$((waited + 1))
-      if [ "$waited" -ge 20 ]; then
-        kill -TERM -- "-$pid" >/dev/null 2>&1 || kill "$pid" >/dev/null 2>&1 || true
+      if [ "$waited" -ge 30 ]; then
+        kill -TERM "$pid" >/dev/null 2>&1 || true
         break
       fi
     done
   else
-    pkill -INT -x wf-recorder >/dev/null 2>&1 || pkill -x wf-recorder >/dev/null 2>&1 || true
-    while pgrep -x wf-recorder >/dev/null 2>&1; do
+    pkill -INT -x gpu-screen-rec >/dev/null 2>&1 || true
+    while pgrep -x gpu-screen-rec >/dev/null 2>&1; do
       sleep 0.1
       waited=$((waited + 1))
-      if [ "$waited" -ge 20 ]; then
-        pkill -x wf-recorder >/dev/null 2>&1 || true
+      if [ "$waited" -ge 30 ]; then
+        pkill -x gpu-screen-rec >/dev/null 2>&1 || true
         break
       fi
     done
@@ -63,6 +64,7 @@ stop_recording() {
   [ -n "$out" ] && notify "Screen recording saved" "$out"
 }
 
+# ── If already recording, stop ──────────────────────────────
 running_pid="$(find_running_pid)"
 if [ -n "$running_pid" ]; then
   stop_recording "$running_pid"
@@ -71,32 +73,41 @@ fi
 
 rm -f "$pid_file"
 
-if ! command -v wf-recorder >/dev/null 2>&1; then
-  notify "Screen recorder missing" "Install with: sudo pacman -S wf-recorder"
+# ── Check tool is installed ─────────────────────────────────
+if ! command -v gpu-screen-recorder >/dev/null 2>&1; then
+  notify "Screen recorder missing" "Install with: sudo pacman -S gpu-screen-recorder"
   exit 1
 fi
 
+# ── Start recording ─────────────────────────────────────────
 ts="$(date +%Y-%m-%d_%H-%M-%S)"
 out_file="$out_dir/screenrec_${ts}.mp4"
 printf '%s\n' "$out_file" > "$last_file"
 
-default_source=""
+# Build command — record the whole screen with audio
+cmd=(
+  gpu-screen-recorder
+  -w screen
+  -f 60
+  -c mp4
+  -o "$out_file"
+)
+
+# Add audio capture if pactl is available
 if command -v pactl >/dev/null 2>&1; then
   default_source="$(pactl get-default-source 2>/dev/null || true)"
+  if [ -n "$default_source" ]; then
+    cmd+=(-a "$default_source")
+  fi
 fi
 
-if [ -n "$default_source" ]; then
-  setsid wf-recorder -f "$out_file" -a -D "$default_source" >/tmp/wf-recorder.log 2>&1 &
-else
-  setsid wf-recorder -f "$out_file" >/tmp/wf-recorder.log 2>&1 &
-fi
-
+setsid "${cmd[@]}" >/tmp/gsr.log 2>&1 &
 pid="$!"
-sleep 0.2
+sleep 1.5
 
 if ! kill -0 "$pid" >/dev/null 2>&1; then
   rm -f "$pid_file"
-  notify "Screen recording failed" "See /tmp/wf-recorder.log"
+  notify "Screen recording failed" "See /tmp/gsr.log"
   refresh_waybar
   exit 1
 fi

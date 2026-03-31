@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-pid_file="${XDG_RUNTIME_DIR:-/tmp}/wf-recorder.pid"
-last_file="${XDG_RUNTIME_DIR:-/tmp}/wf-recorder.last"
+pid_file="${XDG_RUNTIME_DIR:-/tmp}/gsr.pid"
+last_file="${XDG_RUNTIME_DIR:-/tmp}/gsr.last"
 
 pid=""
 if [ -f "$pid_file" ]; then
@@ -15,13 +15,14 @@ if [ -n "$pid" ] && kill -0 "$pid" >/dev/null 2>&1; then
   if [ -n "$out" ]; then
     tooltip="${tooltip}\\n${out}"
   fi
-  printf '{"text":"REC","class":"recording","tooltip":"%s"}\n' "$tooltip"
+  printf '{"text":" REC","class":"recording","tooltip":"%s"}\n' "$tooltip"
   exit 0
 fi
 
-if pgrep -x wf-recorder >/dev/null 2>&1; then
-  printf '{"text":"REC","class":"recording","tooltip":"Screen recording is active\\nClick to stop"}\n'
+if pgrep -x gpu-screen-rec >/dev/null 2>&1; then
+  printf '{"text":" REC","class":"recording","tooltip":"Screen recording is active\\nClick to stop"}\n'
   exit 0
 fi
 
-exit 1
+printf '{"text":"","class":"idle","tooltip":""}\n'
+exit 0
