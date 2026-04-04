@@ -130,14 +130,23 @@ const setActive = (btn: any, state: boolean) => {
     root.set_margin_start(SIZES.marginLeft)
 
     /* ---------- Wi-Fi ---------- */
-    let wifiOn = true
     const wifiTile = tile("tile-wifi")
-    setActive(wifiTile, wifiOn) // Initial state
+
+    const updateWifi = () => {
+        try {
+            const [_, s] = GLib.spawn_command_line_sync("nmcli radio wifi")
+            const status = decode(s)
+            setActive(wifiTile, status === "enabled")
+        } catch { }
+    }
+    updateWifi() // Initial state
 
     wifiTile.connect("button-press-event", () => {
-        wifiOn = !wifiOn
-        GLib.spawn_command_line_async(`nmcli radio wifi ${wifiOn ? "on" : "off"}`)
-        setActive(wifiTile, wifiOn)
+        const [_, s] = GLib.spawn_command_line_sync("nmcli radio wifi")
+        const current = decode(s)
+        const next = current === "enabled" ? "off" : "on"
+        GLib.spawn_command_line_async(`nmcli radio wifi ${next}`)
+        setActive(wifiTile, next === "on")
     })
 
     const wifiHeader = new Astal.Box({ spacing: SIZES.spacingIcon })
@@ -156,13 +165,23 @@ const setActive = (btn: any, state: boolean) => {
     /* ---------- Quick ---------- */
     const quick = new Astal.Box({ spacing: SIZES.spacingIcon })
 
-    let btOn = true
     const bluetoothBtn = circleBtn("bluetooth-active-symbolic")
-    bluetoothBtn.get_style_context().add_class("active-btn")
+
+    const updateBluetooth = () => {
+        try {
+            const [_, s] = GLib.spawn_command_line_sync("bluetoothctl show")
+            const status = decode(s)
+            setActive(bluetoothBtn, status.includes("Powered: yes"))
+        } catch { }
+    }
+    updateBluetooth() // Initial state
+
     bluetoothBtn.connect("clicked", () => {
-        btOn = !btOn
-        GLib.spawn_command_line_async(`bluetoothctl power ${btOn ? "on" : "off"}`)
-        setActive(bluetoothBtn, btOn)
+        const [_, s] = GLib.spawn_command_line_sync("bluetoothctl show")
+        const current = decode(s).includes("Powered: yes")
+        const next = !current
+        GLib.spawn_command_line_async(`bluetoothctl power ${next ? "on" : "off"}`)
+        setActive(bluetoothBtn, next)
     })
 
     let hotspotOn = true
@@ -314,6 +333,8 @@ const setActive = (btn: any, state: boolean) => {
     GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1000, () => {
         updateMusic()
         updatePlaybackState()
+        updateWifi()
+        updateBluetooth()
         return true
     })
 

@@ -35,6 +35,14 @@ fi
 mkdir -p "$(dirname "$state_file")"
 printf '%s\n' "$wallpaper" > "$state_file"
 
+if [ -x "$HOME/.config/hypr/scripts/rofi-wall-cache.sh" ]; then
+  "$HOME/.config/hypr/scripts/rofi-wall-cache.sh" "$wallpaper" >/dev/null 2>&1 || true
+fi
+
+if [ -x "$HOME/.config/hypr/scripts/apply-swaync-ui.sh" ]; then
+  "$HOME/.config/hypr/scripts/apply-swaync-ui.sh" >/dev/null 2>&1 || true
+fi
+
 cat > "$hyprpaper_conf" <<EOF
 splash = false
 preload = $wallpaper

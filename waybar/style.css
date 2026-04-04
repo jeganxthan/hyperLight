@@ -99,6 +99,7 @@ window#waybar {
 #battery,
 #network,
 #custom-wifi,
+#custom-notification,
 #pulseaudio,
 #bluetooth,
 #custom-bluetooth,
@@ -171,6 +172,10 @@ window#waybar {
 /* ── Tray ────────────────────────────────────────────────── */
 #tray {
     padding: 1px 6px;
+}
+
+#custom-notification {
+    font-size: 14px;
 }
 
 #tray>.passive {

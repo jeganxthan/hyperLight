@@ -19,7 +19,7 @@ if [[ "$sleep_after_lock_s" =~ ^[0-9]+$ ]] && [ "$sleep_after_lock_s" -gt 0 ]; t
 fi
 
 if command -v hyprlock >/dev/null 2>&1; then
-  if hyprlock -c /home/jegan/.config/hypr/hyprlock.conf; then
+  if hyprlock --immediate-render -c /home/jegan/.config/hypr/hyprlock.conf; then
     [ -n "$sleep_timer_pid" ] && kill "$sleep_timer_pid" >/dev/null 2>&1 || true
     exit 0
   fi
