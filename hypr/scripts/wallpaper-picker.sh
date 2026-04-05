@@ -30,7 +30,7 @@ if pgrep -af "$menu_match" >/dev/null 2>&1; then
 fi
 
 mapfile -d '' images < <(
-  find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -print0 | sort -z
+  find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) -print0 | sort -z
 )
 [ "${#images[@]}" -gt 0 ] || exit 1
 

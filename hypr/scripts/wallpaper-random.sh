@@ -22,7 +22,7 @@ if [ -z "$wallpaper_dir" ]; then
   exit 1
 fi
 
-mapfile -d '' images < <(find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -print0)
+mapfile -d '' images < <(find "$wallpaper_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) -print0)
 [ "${#images[@]}" -gt 0 ] || exit 1
 
 wallpaper="$(printf '%s\n' "${images[@]}" | shuf -n 1)"

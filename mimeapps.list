@@ -14,3 +14,5 @@ text/plain=vim.desktop;
 video/mp4=mpv.desktop;
 application/pdf=okularApplication_pdf.desktop;com.google.Chrome.desktop;
 text/html=com.google.Chrome.desktop;code.desktop;vim.desktop;
+image/jpeg=org.gnome.eog.desktop;
+image/gif=org.gnome.eog.desktop;

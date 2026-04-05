@@ -17,7 +17,7 @@ pick_first_image() {
   local d
   for d in "${dirs[@]}"; do
     [ -d "$d" ] || continue
-    find "$d" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) | head -n 1
+    find "$d" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" -o -iname "*.gif" \) | head -n 1
     return 0
   done
   return 1
@@ -45,6 +45,27 @@ if [ -x "$HOME/.config/hypr/scripts/apply-swaync-ui.sh" ]; then
   "$HOME/.config/hypr/scripts/apply-swaync-ui.sh" >/dev/null 2>&1 || true
 fi
 
+if [[ "$wallpaper" == *.gif ]]; then
+  if command -v mpvpaper >/dev/null 2>&1; then
+    # Kill any existing mpvpaper and hyprpaper instances
+    pkill -x mpvpaper >/dev/null 2>&1 || true
+    pkill -x hyprpaper >/dev/null 2>&1 || true
+    
+    # Get primary monitor name
+    # eDP-1 is a fallback
+    monitor=$(hyprctl monitors -j | jq -r '.[0].name' || echo "eDP-1")
+    
+    # Start mpvpaper in the background
+    mpvpaper -vs -o "--no-audio --loop-file=inf --hwdec=auto" "$monitor" "$wallpaper" >/dev/null 2>&1 &
+    
+    exit 0
+  fi
+fi
+
+# Not a GIF, or mpvpaper not installed: revert to hyprpaper
+pkill -x mpvpaper >/dev/null 2>&1 || true
+pgrep -x hyprpaper >/dev/null 2>&1 || (hyprpaper >/dev/null 2>&1 & sleep 0.5)
+
 cat > "$hyprpaper_conf" <<EOF
 splash = false
 preload = $wallpaper
@@ -52,7 +73,6 @@ wallpaper = ,$wallpaper
 EOF
 
 if command -v hyprctl >/dev/null 2>&1; then
-  pgrep -x hyprpaper >/dev/null 2>&1 || (hyprpaper >/dev/null 2>&1 & sleep 0.5)
   hyprctl hyprpaper preload "$wallpaper" >/dev/null 2>&1 || true
   hyprctl hyprpaper wallpaper ",$wallpaper" >/dev/null 2>&1 || true
   hyprctl hyprpaper unload unused >/dev/null 2>&1 || true
