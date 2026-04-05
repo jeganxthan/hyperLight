@@ -99,7 +99,9 @@ window#waybar {
 #battery,
 #network,
 #custom-wifi,
+#custom-leftbar,
 #custom-notification,
+#custom-power,
 #pulseaudio,
 #bluetooth,
 #custom-bluetooth,
@@ -175,6 +177,11 @@ window#waybar {
 }
 
 #custom-notification {
+    font-size: 14px;
+}
+
+#custom-leftbar,
+#custom-power {
     font-size: 14px;
 }
 

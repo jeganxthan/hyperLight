@@ -14,7 +14,9 @@
     ],
     "modules-right": [
         "tray",
+        "custom/leftbar",
         "custom/notification",
+        "custom/power",
         "pulseaudio",
         "custom/wifi",
         "custom/bluetooth",
@@ -104,6 +106,26 @@
         "format": "{}",
         "on-click": "/home/jegan/.config/hypr/scripts/sidebar-right.sh toggle",
         "on-click-right": "/home/jegan/.config/hypr/scripts/sidebar-right.sh close",
+        "escape": true
+    },
+    "custom/leftbar": {
+        "tooltip": true,
+        "return-type": "json",
+        "exec": "/home/jegan/.config/hypr/scripts/sidebar-left.sh status",
+        "interval": 5,
+        "format": "{}",
+        "on-click": "/home/jegan/.config/hypr/scripts/sidebar-left.sh toggle",
+        "on-click-right": "/home/jegan/.config/hypr/scripts/sidebar-left.sh close",
+        "escape": true
+    },
+    "custom/power": {
+        "tooltip": true,
+        "return-type": "json",
+        "exec": "/home/jegan/.config/hypr/scripts/session-menu.sh status",
+        "interval": 30,
+        "format": "{}",
+        "on-click": "/home/jegan/.config/hypr/scripts/session-menu.sh toggle",
+        "on-click-right": "/home/jegan/.config/hypr/scripts/session-menu.sh close",
         "escape": true
     }
 }

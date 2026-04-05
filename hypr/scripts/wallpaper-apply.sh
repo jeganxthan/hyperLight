@@ -2,6 +2,7 @@
 set -euo pipefail
 
 state_file="$HOME/.config/hypr/.current_wallpaper"
+lock_wallpaper_link="$HOME/.config/hypr/.current_wallpaper_lock"
 hyprpaper_conf="$HOME/.config/hypr/hyprpaper.conf"
 
 pick_first_image() {
@@ -34,6 +35,7 @@ fi
 
 mkdir -p "$(dirname "$state_file")"
 printf '%s\n' "$wallpaper" > "$state_file"
+ln -sfn "$wallpaper" "$lock_wallpaper_link"
 
 if [ -x "$HOME/.config/hypr/scripts/rofi-wall-cache.sh" ]; then
   "$HOME/.config/hypr/scripts/rofi-wall-cache.sh" "$wallpaper" >/dev/null 2>&1 || true
